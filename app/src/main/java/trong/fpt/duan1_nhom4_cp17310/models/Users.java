@@ -2,7 +2,7 @@ package trong.fpt.duan1_nhom4_cp17310.models;
 
 public class Users {
 
-    private int idUser;
+    private String idUser;
     private String tenTaiKhoan;
     private String matKhau;
     private int loaiTaiKhoan;
@@ -11,18 +11,18 @@ public class Users {
         this.tenTaiKhoan = tenTaiKhoan;
     }
 
-    public Users(int idUser, String tenTaiKhoan, String matKhau, int loaiTaiKhoan) {
+    public Users(String idUser, String tenTaiKhoan, String matKhau, int loaiTaiKhoan) {
         this.idUser = idUser;
         this.tenTaiKhoan = tenTaiKhoan;
         this.matKhau = matKhau;
         this.loaiTaiKhoan = loaiTaiKhoan;
     }
 
-    public int getIdUser() {
+    public String getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(String idUser) {
         this.idUser = idUser;
     }
 
