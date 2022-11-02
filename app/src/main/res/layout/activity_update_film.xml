@@ -5,18 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#403C3C"
-    tools:context=".views.InsertFilmActivity">
+    tools:context=".views.UpdateFilmActivity">
 
     <TextView
         android:id="@+id/tv_them"
         android:layout_width="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Thêm Phim"
+        android:text="Sửa Phim"
         android:textColor="#fff"
         android:textStyle="italic"
         android:textSize="50dp"
-        android:shadowColor="#fff"
         android:layout_centerHorizontal="true"
+        android:shadowColor="#fff"
         android:shadowDx="10"
         android:shadowDy="5"
         android:shadowRadius="10"
@@ -88,7 +88,7 @@
             app:startIconDrawable="@drawable/movie_camera_svgrepo_com">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ip_themTenPhim"
+                android:id="@+id/ip_suaTenPhim"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nhập Tên Phim"
@@ -108,7 +108,7 @@
             app:startIconDrawable="@drawable/date_and_time_icon">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ip_themNgay"
+                android:id="@+id/ip_suaNgay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ngày Khởi Chiếu"
@@ -128,7 +128,7 @@
             app:startIconDrawable="@drawable/price">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ip_themGiaVe"
+                android:id="@+id/ip_suaGiaVe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Giá Vé"
@@ -146,7 +146,7 @@
                 android:textColor="#fff"
                 android:background="#1AFFFFFF"
                 android:layout_height="wrap_content"
-                android:text="Thêm"/>
+                android:text="Sửa"/>
 
             <Button
                 android:layout_width="wrap_content"
