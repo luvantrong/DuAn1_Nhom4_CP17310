@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox chkShowPassword;
     private TextInputEditText tietPassword;
     private TextView tv_register;
+    private Button btn_login;
 
     //Đăng nhập google
     GoogleSignInClient gsc;
@@ -77,6 +78,15 @@ public class LoginActivity extends AppCompatActivity {
         chkShowPassword = findViewById(R.id.chkShowPassword);
         tietPassword = findViewById(R.id.EditTextInputLayOutPass);
         tv_register = findViewById(R.id.tv_register);
+        btn_login = findViewById(R.id.btn_login);
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, Tesst.class);
+                startActivity(intent);
+            }
+        });
 
         tv_register.setOnClickListener(new View.OnClickListener() {
             @Override
