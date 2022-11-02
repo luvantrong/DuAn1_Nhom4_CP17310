@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DuAn1_Nhom4_CP17310</string>
+    <string name="facebook_app_id">3443330282553661</string>
+    <string name="facebook_client_token">d52da1f43e195f5c3d1ce54c9e0752d7</string>
 </resources>
