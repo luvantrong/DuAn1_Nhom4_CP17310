@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.pho.logindanhom1.R;
 
 import trong.fpt.duan1_nhom4_cp17310.R;
 
