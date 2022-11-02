@@ -7,6 +7,10 @@ public class Users {
     private String matKhau;
     private int loaiTaiKhoan;
 
+    public Users(String tenTaiKhoan) {
+        this.tenTaiKhoan = tenTaiKhoan;
+    }
+
     public Users(int idUser, String tenTaiKhoan, String matKhau, int loaiTaiKhoan) {
         this.idUser = idUser;
         this.tenTaiKhoan = tenTaiKhoan;
