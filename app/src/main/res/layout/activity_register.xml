@@ -39,7 +39,7 @@
             app:startIconDrawable="@drawable/ic_user">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/EditTextInputLayOutName"
+                android:id="@+id/ip_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Username"
@@ -63,6 +63,7 @@
             app:startIconDrawable="@drawable/ic_pass">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ip_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -100,6 +101,7 @@
 
 
         <Button
+            android:id="@+id/btn_register"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:text="Register"

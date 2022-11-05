@@ -11,8 +11,7 @@ public class Users {
         this.tenTaiKhoan = tenTaiKhoan;
     }
 
-    public Users(String idUser, String tenTaiKhoan, String matKhau, int loaiTaiKhoan) {
-        this.idUser = idUser;
+    public Users( String tenTaiKhoan, String matKhau, int loaiTaiKhoan) {
         this.tenTaiKhoan = tenTaiKhoan;
         this.matKhau = matKhau;
         this.loaiTaiKhoan = loaiTaiKhoan;
