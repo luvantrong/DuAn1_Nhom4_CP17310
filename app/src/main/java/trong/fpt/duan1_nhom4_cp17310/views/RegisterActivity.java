@@ -35,8 +35,8 @@ public class RegisterActivity extends AppCompatActivity {
     private int dem = 0;
     private Button btn_register;
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    ArrayList<Users> dsTaiKhoan = new ArrayList<>();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private ArrayList<Users> dsTaiKhoan = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

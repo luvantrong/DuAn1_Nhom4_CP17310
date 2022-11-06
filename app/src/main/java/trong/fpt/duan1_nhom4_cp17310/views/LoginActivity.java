@@ -36,6 +36,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
@@ -43,11 +45,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import trong.fpt.duan1_nhom4_cp17310.R;
 import trong.fpt.duan1_nhom4_cp17310.models.Users;
@@ -58,6 +67,9 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText tietPassword;
     private TextView tv_register;
     private Button btn_login;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private ArrayList<Users> dsTaiKhoan = new ArrayList<>();
+    private int dem = 0;
 
     //Đăng nhập google
     GoogleSignInClient gsc;
@@ -119,6 +131,8 @@ public class LoginActivity extends AppCompatActivity {
         //Kiểm tra login Google
         account = GoogleSignIn.getLastSignedInAccount(LoginActivity.this);
         if (account != null) {
+
+
             Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(homeIntent);
             finish();
@@ -191,10 +205,12 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         GoogleSignInAccount account = task.getResult(ApiException.class);
                         String email = account.getEmail();
-                        String hoTen = account.getDisplayName();
+                        String matKhau = "";
+                        int loaiTaiKhoan = 0;
                         Log.d(">>>TAG", "onActivityResult: " + email);
                         //Chuyển qua màn hình MainActivity
                         if (account != null) {
+                            insertUser(email, matKhau, loaiTaiKhoan);
                             Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(homeIntent);
                             finish();
@@ -217,8 +233,10 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mFirebaseAuth.getCurrentUser();
                             String name = user.getEmail();
-                            String hoTen = user.getDisplayName();
-                            writeLogin(new Users(name));
+                            String matKhau = "";
+                            int loaiTaiKhoan = 0;
+                            writeLogin(new Users(name, matKhau, loaiTaiKhoan));
+                            insertUser(name, matKhau, loaiTaiKhoan);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -265,5 +283,80 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent1);
         }
+    }
+
+    private void insertUser(String user, String passWord, int loaiTaiKhoan) {
+        ArrayList<Users> list = new ArrayList<>();
+        db.collection("users")
+                .whereEqualTo("tenTaiKhoan", user)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> map = document.getData();
+                                String tenTaiKhoan = map.get("tenTaiKhoan").toString();
+                                String matKhau = map.get("matKhau").toString();
+                                Integer loaiTaiKhoan = Integer.valueOf(map.get("loaiTaiKhoan").toString());
+                                Users users = new Users(tenTaiKhoan, matKhau, loaiTaiKhoan);
+                                list.add(users);
+                            }
+                            dsTaiKhoan = list;
+                            if (dsTaiKhoan.size() == 0) {
+                                Map<String, Object> users = new HashMap<>();
+                                users.put("tenTaiKhoan", user);
+                                users.put("matKhau", passWord);
+                                users.put("loaiTaiKhoan", 0);
+
+                                db.collection("users")
+                                        .add(users)
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                            @Override
+                                            public void onSuccess(DocumentReference documentReference) {
+                                                Toast.makeText(LoginActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(LoginActivity.this, "THêm không thành công", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            } else {
+                                for (int i = 0; i < dsTaiKhoan.size(); i++) {
+                                    String tenTaiKhoans = dsTaiKhoan.get(i).getTenTaiKhoan();
+                                    if (tenTaiKhoans.equalsIgnoreCase(user)) {
+                                        dem = 1;
+                                        break;
+                                    }
+                                }
+                                if (dem == 0) {
+
+                                    Map<String, Object> users = new HashMap<>();
+                                    users.put("tenTaiKhoan", user);
+                                    users.put("matKhau", passWord);
+                                    users.put("loaiTaiKhoan", loaiTaiKhoan);
+
+                                    db.collection("users")
+                                            .add(user)
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                @Override
+                                                public void onSuccess(DocumentReference documentReference) {
+                                                    Toast.makeText(LoginActivity.this, "Inserted", Toast.LENGTH_SHORT).show();
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(LoginActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
+                            }
+                        }
+                    }
+                });
     }
 }
