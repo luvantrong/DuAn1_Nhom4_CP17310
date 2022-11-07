@@ -3,6 +3,7 @@ package trong.fpt.duan1_nhom4_cp17310.views;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -56,7 +57,24 @@ public class RegisterActivity extends AppCompatActivity {
                 String passWord = ip_passWord.getText().toString();
                 String enterPass = ip_enterPass.getText().toString();
                 int loaiTaiKhoan = 0;
-                insertUser(user, passWord, enterPass);
+
+                if(user.length()==0 || passWord.length()==0 || enterPass.length() == 0){
+                    new AlertDialog.Builder(RegisterActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Bạn phải nhập đầy đủ thông tin: \n- Tên tài khoản\n- Mật khẩu")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                }else if(!passWord.equalsIgnoreCase(enterPass)){
+                    new AlertDialog.Builder(RegisterActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Mật khẩu không trùng khớp")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                }else{
+                    insertUser(user, passWord, enterPass);
+                }
             }
         });
 
