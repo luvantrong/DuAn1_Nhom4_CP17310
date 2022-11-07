@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -67,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText tietPassword;
     private TextView tv_register;
     private Button btn_login;
+    private TextInputEditText editTextInputLayOutName, editTextInputLayOutPass;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayList<Users> dsTaiKhoan = new ArrayList<>();
     private int dem = 0;
@@ -91,12 +94,57 @@ public class LoginActivity extends AppCompatActivity {
         tietPassword = findViewById(R.id.EditTextInputLayOutPass);
         tv_register = findViewById(R.id.tv_register);
         btn_login = findViewById(R.id.btn_login);
+        editTextInputLayOutName = findViewById(R.id.EditTextInputLayOutName);
+        editTextInputLayOutPass = findViewById(R.id.EditTextInputLayOutPass);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+                String tenTaiKhoan = editTextInputLayOutName.getText().toString();
+                String matKhau = editTextInputLayOutPass.getText().toString();
+
+                if(tenTaiKhoan.length() ==0 || matKhau.length() ==0){
+                    new AlertDialog.Builder(LoginActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Bạn phải nhập đầy đủ thông tin: \n- Tên tài khoản\n- Mật khẩu")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                } else {
+                    ArrayList<Users> list = new ArrayList<>();
+                    db.collection("users")
+                            .whereEqualTo("tenTaiKhoan", tenTaiKhoan)
+                            .whereEqualTo("matKhau", matKhau)
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            Map<String, Object> map = document.getData();
+                                            String tenTaiKhoan = map.get("tenTaiKhoan").toString();
+                                            String matKhau = map.get("matKhau").toString();
+                                            Integer loaiTaiKhoan = Integer.valueOf(map.get("loaiTaiKhoan").toString());
+                                            Users users = new Users(tenTaiKhoan, matKhau, loaiTaiKhoan);
+                                            list.add(users);
+                                        }
+                                        if(list.size()==0){
+                                            new AlertDialog.Builder(LoginActivity.this)
+                                                    .setTitle("Thông báo")
+                                                    .setMessage("Sai thông tin tài khoản")
+                                                    .setIcon(R.drawable.attention_warning_14525)
+                                                    .setPositiveButton("OK", null)
+                                                    .show();
+                                        }else{
+                                            writeLogin(list.get(0));
+                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }
+                                }
+                            });
+                }
+
             }
         });
 
@@ -131,8 +179,6 @@ public class LoginActivity extends AppCompatActivity {
         //Kiểm tra login Google
         account = GoogleSignIn.getLastSignedInAccount(LoginActivity.this);
         if (account != null) {
-
-
             Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(homeIntent);
             finish();
@@ -258,6 +304,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        readLogin();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
         if (currentUser != null) {
@@ -279,6 +326,7 @@ public class LoginActivity extends AppCompatActivity {
     private void readLogin(){
         SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_STATUS", MODE_PRIVATE);
         Boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+        String email = sharedPreferences.getString("email", "email");
         if(isLoggedIn){
             Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent1);
