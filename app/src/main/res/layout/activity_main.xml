@@ -17,7 +17,9 @@
         android:id="@+id/navigation_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:itemTextColor="@color/custom_navigation_bottom"
         app:menu="@menu/menu_bottom"
-        android:background="#fff"
+        app:itemIconTint="@color/custom_navigation_bottom"
+        app:itemBackground="@color/com_facebook_blue"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

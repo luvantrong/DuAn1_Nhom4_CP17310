@@ -9,9 +9,6 @@
     <item android:id="@+id/tintuc"
         android:icon="@drawable/tintuc"
         android:title="Tin tức"/>
-    <item android:id="@+id/quanly"
-        android:icon="@drawable/quanly"
-        android:title="Quản lý"/>
     <item android:id="@+id/khac"
         android:icon="@drawable/khac"
         android:title="Khác"/>

@@ -50,7 +50,4 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
     implementation 'com.google.firebase:firebase-auth:21.1.0'
     implementation 'me.relex:circleindicator:2.1.6'
-
-
-
 }

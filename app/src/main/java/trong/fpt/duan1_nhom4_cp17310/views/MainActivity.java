@@ -46,10 +46,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.tintuc:
                 fragment = new FragmentTinTuc();
                 break;
-
-            case R.id.quanly:
-                fragment = new FragmentQuanLy();
-                break;
             case R.id.khac:
                 fragment = new FragmentKhac();
                 break;
