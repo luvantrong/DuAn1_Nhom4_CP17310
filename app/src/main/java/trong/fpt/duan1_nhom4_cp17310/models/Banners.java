@@ -4,6 +4,7 @@ public class Banners {
 
     private String linkAnh;
     private String moTa;
+    private String idBanners;
 
     public Banners(String linkAnh, String moTa) {
         this.linkAnh = linkAnh;
@@ -24,5 +25,13 @@ public class Banners {
 
     public void setMoTa(String moTa) {
         this.moTa = moTa;
+    }
+
+    public String getIdBanners() {
+        return idBanners;
+    }
+
+    public void setIdBanners(String idBanners) {
+        this.idBanners = idBanners;
     }
 }

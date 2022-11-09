@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import trong.fpt.duan1_nhom4_cp17310.Interfaces.ItemClickListener;
+import trong.fpt.duan1_nhom4_cp17310.Interfaces.OnItemClickBannerManager;
 import trong.fpt.duan1_nhom4_cp17310.R;
 import trong.fpt.duan1_nhom4_cp17310.ViewHolder.BannerViewHolder;
 import trong.fpt.duan1_nhom4_cp17310.models.Banners;
@@ -40,6 +43,14 @@ public class AdapterBannerManager extends RecyclerView.Adapter<BannerViewHolder>
         holder.tv_banner.setText("Mô tả: "+ banners.getMoTa());
         String imageLink = banners.getLinkAnh();
         new DownloadImageFromInternet(holder.imv_banner).execute(imageLink);
+
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongClick) {
+                OnItemClickBannerManager onItemClickBannerManager = (OnItemClickBannerManager) view.getContext();
+                onItemClickBannerManager.onItemClickDelete(banners);
+            }
+        });
     }
 
     @Override

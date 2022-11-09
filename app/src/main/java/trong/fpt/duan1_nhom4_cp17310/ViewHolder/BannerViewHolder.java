@@ -15,7 +15,6 @@ public class BannerViewHolder extends RecyclerView.ViewHolder implements View.On
 
     public TextView tv_banner;
     public ImageView imv_banner;
-    public Button btn_delete_banner;
     private ItemClickListener itemClickListener;
 
     public BannerViewHolder(@NonNull View itemView) {
@@ -23,7 +22,6 @@ public class BannerViewHolder extends RecyclerView.ViewHolder implements View.On
         itemView.setOnLongClickListener(this);
         this.tv_banner = itemView.findViewById(R.id.tv_banner);
         this.imv_banner = itemView.findViewById(R.id.imv_banner);
-        this.btn_delete_banner = itemView.findViewById(R.id.btn_delete_banner);
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener)

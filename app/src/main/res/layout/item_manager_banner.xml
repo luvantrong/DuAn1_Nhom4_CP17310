@@ -21,20 +21,9 @@
         android:text="Phim Adam"
         android:layout_below="@+id/imv_banner"
         android:textSize="20sp"
-        android:layout_marginLeft="35dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:textColor="@color/black"/>
-
-    <Button
-        android:id="@+id/btn_delete_banner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        android:textAllCaps="false"
-        android:layout_below="@+id/imv_banner"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="35dp"
-        android:layout_marginTop="5dp"/>
 
 
 </RelativeLayout>
