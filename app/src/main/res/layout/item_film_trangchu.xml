@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/custom_banner"
     android:padding="10dp"
@@ -18,43 +18,32 @@
         android:id="@+id/tv_name_film"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tên phim: Black Adam"
-        android:layout_toRightOf="@+id/imv_film_manager"
+        android:text="Black Adam"
+        android:layout_below="@+id/imv_film_manager"
         android:layout_marginLeft="15dp"
         android:textSize="25sp"
-        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
         android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/tv_date_film"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ngày chiếu: 15/10/2022"
-        android:layout_toRightOf="@+id/imv_film_manager"
+        android:text="15/10/2022"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="15dp"
         android:layout_below="@+id/tv_name_film"
         android:textSize="20sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="15dp"/>
-
-    <TextView
-        android:id="@+id/tv_price_film"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Giá vé: 85.000đ"
-        android:layout_toRightOf="@+id/imv_film_manager"
-        android:layout_marginLeft="15dp"
-        android:layout_below="@+id/tv_date_film"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="15dp"/>
+        android:textColor="@color/black" />
 
     <Button
-        android:id="@+id/btn_delete_film"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="215dp"/>
+        android:id="@+id/btn_datve"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:text="Đặt vé"
+        android:textAllCaps="false"
+        android:background="#FF9800"
+        android:layout_marginTop="226dp"
+        android:layout_marginLeft="112dp"/>
 
 </RelativeLayout>
