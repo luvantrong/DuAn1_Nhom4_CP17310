@@ -20,6 +20,6 @@
         app:itemTextColor="@color/custom_navigation_bottom"
         app:menu="@menu/menu_bottom"
         app:itemIconTint="@color/custom_navigation_bottom"
-        app:itemBackground="@color/com_facebook_blue"
+        app:itemBackground="@color/black"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>
