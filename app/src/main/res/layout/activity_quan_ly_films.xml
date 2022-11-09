@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.QuanLyFilmsActivity">
+    tools:context=".views.QuanLyBannerActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvTitleFilm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DANH SÁCH PHIM"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:background="@android:color/holo_blue_bright"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_film"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tvTitleFilm"
+        android:padding="6dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_insert_film"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_add_24"
+        app:layout_anchor="@id/rv_film"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        app:fabSize="normal"
+        android:backgroundTint="@android:color/holo_blue_bright"
+        />
+
+</RelativeLayout>

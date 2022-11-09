@@ -18,7 +18,8 @@
            android:layout_marginTop="20dp"
            android:layout_width="wrap_content"
            android:layout_height="300dp"
-           android:src="@drawable/tc"/>
+           android:src="@drawable/tc"
+           android:contentDescription="TODO" />
 
        <TextView
            android:id="@+id/tv_tenphim"
@@ -26,7 +27,7 @@
            android:layout_height="wrap_content"
            android:text="Tên Phim"
            android:layout_marginTop="10dp"
-           android:textSize="27dp"
+           android:textSize="27sp"
            android:textColor="#fff"
            android:shadowRadius="10"
            android:shadowDy="5"
@@ -59,9 +60,8 @@
        <Spinner
            android:id="@+id/spn_chongio"
            android:layout_width="320dp"
-           android:layout_marginTop="20dp"
-           android:background="@drawable/style_spinner"
-           android:layout_height="35dp"/>
+           android:layout_height="48dp"
+           android:layout_marginTop="20dp" />
    </LinearLayout>
 
     <LinearLayout
@@ -98,7 +98,5 @@
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
-
-
 
 </RelativeLayout>

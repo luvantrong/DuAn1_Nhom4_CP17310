@@ -10,25 +10,38 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import me.relex.circleindicator.CircleIndicator3;
-import trong.fpt.duan1_nhom4_cp17310.Adapters.PhotoAdapter;
+import trong.fpt.duan1_nhom4_cp17310.Adapters.AdapterBannerManager;
+import trong.fpt.duan1_nhom4_cp17310.Adapters.AdapterBannerTrangChu;
 import trong.fpt.duan1_nhom4_cp17310.R;
+import trong.fpt.duan1_nhom4_cp17310.models.Banners;
 import trong.fpt.duan1_nhom4_cp17310.models.Photo;
+import trong.fpt.duan1_nhom4_cp17310.views.QuanLyBannerActivity;
 
 public class FragmentTrangChu extends Fragment {
 
     private ViewPager2 viewPager2;
     private CircleIndicator3 circleIndicator3;
     private RecyclerView rvBook;
-    private List<Photo> mList;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    private List<Banners> mList;
     private Handler mHanler = new Handler(Looper.getMainLooper());
     private Runnable mRunnable = new Runnable() {
         @Override
@@ -69,10 +82,8 @@ public class FragmentTrangChu extends Fragment {
         });
         viewPager2.setPageTransformer(compositePageTransformer);
 
-        mList = getListPhoto();
-        PhotoAdapter adapter = new PhotoAdapter(mList);
-        viewPager2.setAdapter(adapter);
-        circleIndicator3.setViewPager(viewPager2);
+
+
 
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -94,15 +105,34 @@ public class FragmentTrangChu extends Fragment {
         return view;
     }
 
-    private List<Photo> getListPhoto(){
-        List<Photo> list = new ArrayList<>();
-        list.add(new Photo(R.drawable.cn1));
-        list.add(new Photo(R.drawable.cn2));
-        list.add(new Photo(R.drawable.cn3));
-        list.add(new Photo(R.drawable.cn4));
-        list.add(new Photo(R.drawable.cn5));
-        list.add(new Photo(R.drawable.cn6));
-        list.add(new Photo(R.drawable.cn7));
-        return list;
+    private void getDataBanner(){
+
+        db.collection("banner")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            mList = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> map = document.getData();
+                                String linkAnh = map.get("linkAnh").toString();
+                                String moTa = map.get("tenphim").toString();
+                                Banners banners = new Banners(linkAnh, moTa);
+//                                course.setCourseId(document.getId());
+                                mList.add(banners);
+                            }
+                            AdapterBannerTrangChu adapter = new AdapterBannerTrangChu(mList);
+                            viewPager2.setAdapter(adapter);
+                            circleIndicator3.setViewPager(viewPager2);
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataBanner();
     }
 }

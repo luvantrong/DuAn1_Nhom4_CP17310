@@ -31,30 +31,12 @@
         app:srcCompat="@drawable/avengers" />
 
     <ImageView
-        android:id="@+id/iv_camera"
-        android:layout_below="@+id/iv_anh"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="100dp"
-        android:src="@drawable/camera"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Camera"
-        android:layout_below="@+id/iv_camera"
-        android:layout_marginLeft="100dp"
-        android:textColor="#fff"/>
-
-    <ImageView
         android:id="@+id/iv_storage"
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:layout_below="@+id/iv_anh"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="100dp"
+        android:layout_centerHorizontal="true"
         android:src="@drawable/storage"/>
 
     <TextView
@@ -63,9 +45,7 @@
         android:layout_height="wrap_content"
         android:text="Storage"
         android:layout_below="@+id/iv_storage"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="100dp"
-        android:layout_marginLeft="40dp"
+        android:layout_centerHorizontal="true"
         android:textColor="#fff"/>
 
     <LinearLayout

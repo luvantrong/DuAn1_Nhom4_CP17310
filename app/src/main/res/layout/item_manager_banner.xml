@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_banner"
+    android:padding="10dp"
+    android:layout_margin="10dp">
+
+    <ImageView
+        android:id="@+id/imv_banner"
+        android:layout_width="300dp"
+        android:layout_height="140dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/cn1"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/tv_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phim Adam"
+        android:layout_below="@+id/imv_banner"
+        android:textSize="20sp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/btn_delete_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:textAllCaps="false"
+        android:layout_below="@+id/imv_banner"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="5dp"/>
+
+
+</RelativeLayout>
