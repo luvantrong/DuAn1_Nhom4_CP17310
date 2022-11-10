@@ -8,9 +8,10 @@
 
     <ImageView
         android:id="@+id/imv_film_manager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
         android:scaleType="fitXY"
+        android:layout_centerHorizontal="true"
         android:src="@drawable/p2_blackadam"
         android:layout_alignParentLeft="true"/>
 
@@ -21,7 +22,7 @@
         android:text="Black Adam"
         android:layout_below="@+id/imv_film_manager"
         android:layout_marginLeft="15dp"
-        android:textSize="25sp"
+        android:textSize="15sp"
         android:layout_centerHorizontal="true"
         android:textColor="@color/black"/>
 
@@ -33,8 +34,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="15dp"
         android:layout_below="@+id/tv_name_film"
-        android:textSize="20sp"
-        android:textColor="@color/black" />
+        android:textSize="13sp"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/btn_datve"
@@ -43,7 +44,7 @@
         android:text="Đặt vé"
         android:textAllCaps="false"
         android:background="#FF9800"
-        android:layout_marginTop="226dp"
-        android:layout_marginLeft="112dp"/>
+        android:layout_marginTop="165dp"
+        android:layout_marginLeft="85dp"/>
 
 </RelativeLayout>

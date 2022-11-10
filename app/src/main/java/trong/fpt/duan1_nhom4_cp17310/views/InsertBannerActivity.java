@@ -104,7 +104,7 @@ public class InsertBannerActivity extends AppCompatActivity {
                             public void onFailure(@NonNull Exception e) {
                                 new AlertDialog.Builder(InsertBannerActivity.this)
                                         .setTitle("Notification")
-                                        .setMessage("Add account failed")
+                                        .setMessage("Add banner failed")
                                         .setPositiveButton("OK", null)
                                         .show();
                             }

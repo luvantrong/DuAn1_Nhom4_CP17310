@@ -23,18 +23,20 @@
         android:layout_height="wrap_content"/>
 
     <ImageView
-        android:id="@+id/iv_anh"
-        android:layout_width="match_parent"
+        android:id="@+id/iv_image_update_film"
+        android:layout_width="150dp"
         android:layout_below="@id/tv_them"
         android:layout_marginTop="30dp"
         android:layout_height="200dp"
+        android:scaleType="fitXY"
+        android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/avengers" />
 
     <ImageView
-        android:id="@+id/iv_storage"
+        android:id="@+id/imv_choose_update"
         android:layout_width="50dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/iv_anh"
+        android:layout_below="@+id/iv_image_update_film"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/storage"/>
@@ -44,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Storage"
-        android:layout_below="@+id/iv_storage"
+        android:layout_below="@+id/imv_choose_update"
         android:layout_centerHorizontal="true"
         android:textColor="#fff"/>
 
@@ -122,6 +124,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
+                android:id="@+id/btn_update_film"
                 android:layout_width="wrap_content"
                 android:textColor="#fff"
                 android:background="#1AFFFFFF"
@@ -129,6 +132,7 @@
                 android:text="Sửa"/>
 
             <Button
+                android:id="@+id/btn_cancel_update_film"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#fff"

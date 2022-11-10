@@ -1,17 +1,20 @@
 package trong.fpt.duan1_nhom4_cp17310.models;
 
-public class Film {
+import java.io.Serializable;
+
+public class Film implements Serializable {
 
     private String idFilm;
     private String tenFilm;
     private String ngayChieu;
-    private int giaVe;
+    private String giaVe;
+    private String linkAnh;
 
-    public Film(String idFilm, String tenFilm, String ngayChieu, int giaVe) {
-        this.idFilm = idFilm;
+    public Film(String tenFilm, String ngayChieu, String giaVe, String linkAnh) {
         this.tenFilm = tenFilm;
         this.ngayChieu = ngayChieu;
         this.giaVe = giaVe;
+        this.linkAnh = linkAnh;
     }
 
     public String getIdFilm() {
@@ -38,11 +41,19 @@ public class Film {
         this.ngayChieu = ngayChieu;
     }
 
-    public int getGiaVe() {
+    public String getGiaVe() {
         return giaVe;
     }
 
-    public void setGiaVe(int giaVe) {
+    public void setGiaVe(String giaVe) {
         this.giaVe = giaVe;
+    }
+
+    public String getLinkAnh() {
+        return linkAnh;
+    }
+
+    public void setLinkAnh(String linkAnh) {
+        this.linkAnh = linkAnh;
     }
 }

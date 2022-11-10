@@ -15,7 +15,7 @@ public class FilmManagerViewHolder extends RecyclerView.ViewHolder implements Vi
 
     public TextView tv_name_film, tv_date_film, tv_price_film;
     public ImageView imv_film_manager;
-    private Button btn_delete_film;
+    public Button btn_delete_film;
     private ItemClickListener itemClickListener;
 
     public FilmManagerViewHolder(@NonNull View itemView) {
@@ -25,7 +25,7 @@ public class FilmManagerViewHolder extends RecyclerView.ViewHolder implements Vi
         this.tv_date_film = itemView.findViewById(R.id.tv_date_film);
         this.tv_price_film = itemView.findViewById(R.id.tv_price_film);
         this.imv_film_manager = itemView.findViewById(R.id.imv_film_manager);
-        this.btn_delete_film = itemView.findViewById(R.id.btn_delete_film);
+        this.btn_delete_film = itemView.findViewById(R.id.btn_delete_film_manager);
 
     }
 

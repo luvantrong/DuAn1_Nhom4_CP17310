@@ -23,19 +23,21 @@
         android:layout_height="wrap_content"/>
 
     <ImageView
-        android:id="@+id/iv_anh"
-        android:layout_width="match_parent"
+        android:id="@+id/iv_anh_quanli_phim"
+        android:layout_width="150dp"
         android:layout_below="@id/tv_them"
         android:layout_marginTop="30dp"
         android:layout_height="200dp"
-        app:srcCompat="@drawable/avengers" />
+        android:scaleType="fitXY"
+        android:layout_centerHorizontal="true"
+        />
 
 
     <ImageView
         android:id="@+id/imv_choose_image_film"
         android:layout_width="50dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/iv_anh"
+        android:layout_below="@+id/iv_anh_quanli_phim"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/storage"/>
@@ -45,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Choose image film"
-        android:layout_below="@+id/iv_storage"
+        android:layout_below="@+id/imv_choose_image_film"
         android:layout_centerHorizontal="true"
         android:textColor="#fff"/>
 
@@ -123,6 +125,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
+                android:id="@+id/btn_insert_film"
                 android:layout_width="wrap_content"
                 android:textColor="#fff"
                 android:background="#1AFFFFFF"
@@ -130,6 +133,7 @@
                 android:text="Thêm"/>
 
             <Button
+                android:id="@+id/btn_cancel_insert_film"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
