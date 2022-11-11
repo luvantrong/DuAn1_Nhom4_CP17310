@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/custom_banner"
+    android:background="#656464"
     android:padding="10dp"
     android:layout_margin="10dp">
 
@@ -23,7 +23,7 @@
         android:textSize="20sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:textColor="@color/black"/>
+        android:textColor="#fff"/>
 
 
 </RelativeLayout>

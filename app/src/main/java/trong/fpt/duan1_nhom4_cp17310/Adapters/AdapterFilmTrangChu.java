@@ -40,8 +40,6 @@ public class AdapterFilmTrangChu extends RecyclerView.Adapter<FilmTrangChuViewHo
     @Override
     public void onBindViewHolder(@NonNull FilmTrangChuViewHolder holder, int position) {
         Film film = dsFilm.get(position);
-        holder.tv_name_film.setText(film.getTenFilm());
-        holder.tv_date_film.setText(film.getNgayChieu());
         String imageLink = film.getLinkAnh();
         new DownloadImageFromInternet(holder.imv_film_manager).execute(imageLink);
     }
