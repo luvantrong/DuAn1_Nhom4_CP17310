@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#403C3C"
+    android:background="#161616"
     tools:context=".views.InsertFilmActivity">
 
     <TextView
@@ -27,6 +27,7 @@
         android:layout_width="150dp"
         android:layout_below="@id/tv_them"
         android:layout_marginTop="30dp"
+        android:background="#202020"
         android:layout_height="200dp"
         android:scaleType="fitXY"
         android:layout_centerHorizontal="true"

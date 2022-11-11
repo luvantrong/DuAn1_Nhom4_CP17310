@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#F3EEEE"
+    android:background="#161616"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="Tiện ích"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
                     android:layout_marginTop="15dp"
                     android:paddingBottom="10dp"
                     android:text="Hóa đơn"
-                    android:textColor="#000"
+                    android:textColor="#fff"
                     android:textSize="17dp" />
             </LinearLayout>
 
@@ -75,7 +75,7 @@
                     android:layout_marginTop="15dp"
                     android:paddingBottom="10dp"
                     android:text="Vé đã đặt"
-                    android:textColor="#000"
+                    android:textColor="#fff"
                     android:textSize="17dp" />
             </LinearLayout>
 
@@ -99,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Quản lý"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -129,11 +129,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
                     android:text="Quản lý phim"
-                    android:textColor="#000"
+                    android:textColor="#fff"
                     android:textSize="17dp" />
             </LinearLayout>
 
@@ -162,7 +162,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginBottom="15dp"
                     android:text="Quản lý banner"
-                    android:textColor="#000"
+                    android:textColor="#fff"
                     android:textSize="17dp" />
             </LinearLayout>
 
@@ -186,7 +186,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Tài Khoản"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -213,13 +213,13 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="22dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
                     android:text="Thông tin cá nhân"
-                    android:textColor="#000"
+                    android:textColor="#fff"
                     android:textSize="17dp" />
             </LinearLayout>
 
@@ -241,13 +241,13 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
                     android:text="Đổi mật khẩu"
-                    android:textColor="#000"
+                    android:textColor="#fff"
                     android:textSize="17dp" />
             </LinearLayout>
 
@@ -271,11 +271,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
                     android:text="Đăng xuất"
-                    android:textColor="#000"
+                    android:textColor="#fff"
                     android:textSize="17dp" />
             </LinearLayout>
 

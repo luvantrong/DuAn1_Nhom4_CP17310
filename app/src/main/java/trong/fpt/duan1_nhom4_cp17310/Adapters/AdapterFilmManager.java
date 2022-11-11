@@ -42,9 +42,9 @@ public class AdapterFilmManager extends RecyclerView.Adapter<FilmManagerViewHold
     @Override
     public void onBindViewHolder(@NonNull FilmManagerViewHolder holder, int position) {
         Film film = dsFilm.get(position);
-        holder.tv_name_film.setText("Tên phim: "+ film.getTenFilm());
-        holder.tv_date_film.setText("Ngày khởi chiếu: "+ film.getNgayChieu());
-        holder.tv_price_film.setText("Giá vé: "+ film.getGiaVe()+"đ");
+        holder.tv_name_film.setText(film.getTenFilm());
+        holder.tv_date_film.setText(film.getNgayChieu());
+        holder.tv_price_film.setText(film.getGiaVe()+"đ");
         String imageLink = film.getLinkAnh();
         new DownloadImageFromInternet(holder.imv_film_manager).execute(imageLink);
 

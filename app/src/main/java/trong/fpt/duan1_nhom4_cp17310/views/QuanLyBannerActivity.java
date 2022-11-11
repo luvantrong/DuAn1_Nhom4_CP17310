@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +31,7 @@ import trong.fpt.duan1_nhom4_cp17310.R;
 import trong.fpt.duan1_nhom4_cp17310.models.Banners;
 
 public class QuanLyBannerActivity extends AppCompatActivity implements OnItemClickBannerManager {
+    private ImageView iv_trangchu;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FloatingActionButton flt_insert_banner;
@@ -40,6 +42,15 @@ public class QuanLyBannerActivity extends AppCompatActivity implements OnItemCli
         setContentView(R.layout.activity_quan_ly_banner);
         flt_insert_banner = findViewById(R.id.btn_insert_banner);
         rv_banner = findViewById(R.id.rv_banner);
+        iv_trangchu = findViewById(R.id.iv_trangchu);
+
+        iv_trangchu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(QuanLyBannerActivity.this,MainActivity.class);
+                startActivity(i);
+            }
+        });
 
         flt_insert_banner.setOnClickListener(new View.OnClickListener() {
             @Override

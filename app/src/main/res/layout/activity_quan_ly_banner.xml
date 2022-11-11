@@ -7,24 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".views.QuanLyBannerActivity">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="DANH SÁCH BANNER"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:padding="8dp"
-        android:background="@android:color/holo_blue_bright"/>
+    <ImageView
+        android:id="@+id/iv_trangchu"
+        android:layout_width="60dp"
+        android:padding="15dp"
+        android:layout_height="60dp"
+        android:src="@drawable/trangchu"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_banner"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tvTitle"
-        android:padding="6dp"/>
+        android:layout_below="@+id/iv_trangchu"
+        android:padding="6dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_insert_banner"

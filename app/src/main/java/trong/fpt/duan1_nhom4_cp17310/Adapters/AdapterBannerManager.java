@@ -40,7 +40,7 @@ public class AdapterBannerManager extends RecyclerView.Adapter<BannerViewHolder>
     @Override
     public void onBindViewHolder(@NonNull BannerViewHolder holder, int position) {
         Banners banners = dsBanners.get(position);
-        holder.tv_banner.setText("Mô tả: "+ banners.getMoTa());
+        holder.tv_banner.setText(banners.getMoTa());
         String imageLink = banners.getLinkAnh();
         new DownloadImageFromInternet(holder.imv_banner).execute(imageLink);
 
