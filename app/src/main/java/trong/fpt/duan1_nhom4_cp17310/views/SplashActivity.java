@@ -22,13 +22,13 @@ public class SplashActivity extends AppCompatActivity {
 
         iv_splash = findViewById(R.id.iv_splash);
 
-        Glide.with(this).load(R.drawable.ciname).into(iv_splash);
+        Glide.with(this).load(R.drawable.cgv).into(iv_splash);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(new Intent(SplashActivity.this,LoginActivity.class));
                 finish();
             }
-        },1000);
+        },3000);
     }
 }

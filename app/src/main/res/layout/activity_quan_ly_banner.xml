@@ -8,32 +8,28 @@
     tools:context=".views.QuanLyBannerActivity">
 
     <ImageView
-        android:id="@+id/iv_trangchu"
-        android:layout_width="60dp"
-        android:padding="15dp"
-        android:layout_height="60dp"
+        android:id="@+id/iv_trangchu_banner"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
         android:src="@drawable/trangchu"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_banner"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/iv_trangchu"
+        android:layout_below="@+id/iv_trangchu_banner"
         android:padding="6dp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageButton
         android:id="@+id/btn_insert_banner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@android:color/holo_blue_bright"
-        android:src="@drawable/ic_baseline_add_24"
-        app:fabSize="normal"
-        app:layout_anchor="@id/rv_banner" />
+        android:layout_toRightOf="@+id/iv_trangchu_banner"
+        android:background="@android:color/transparent"
+        android:src="@drawable/add_svgrepo_com" />
 
 </RelativeLayout>

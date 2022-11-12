@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#000000"
+    android:background="@drawable/custom_background_splash"
     android:layout_height="match_parent"
     tools:context=".views.SplashActivity" >
 
@@ -17,5 +17,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ciname" />
+        app:srcCompat="@drawable/cgv" />
 </androidx.constraintlayout.widget.ConstraintLayout>

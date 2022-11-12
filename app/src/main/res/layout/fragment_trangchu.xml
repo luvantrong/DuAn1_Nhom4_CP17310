@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="35dp">
@@ -36,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Gợi ý cho bạn"
+            android:layout_marginBottom="10dp"
             android:textSize="20dp"
             android:shadowRadius="10"
             android:shadowDy="5"
@@ -45,41 +46,74 @@
             android:textColor="#fff"
             android:layout_below="@+id/circleIndicator"/>
 
+
         <LinearLayout
             android:id="@+id/lv_goiy"
             android:layout_width="match_parent"
             android:layout_height="360dp"
-            android:orientation="vertical"
             android:layout_below="@+id/tv_title_top_film"
-            android:background="@drawable/goiy">
+            android:layout_marginTop="0dp"
+            android:background="@drawable/adam"
+            android:orientation="vertical">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/vp_goiy"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:paddingStart="90dp"
-                android:paddingEnd="90dp"
                 android:layout_marginTop="15dp"
-                />
+                android:paddingStart="90dp"
+                android:paddingEnd="90dp" />
 
-            <TextView
-                android:id="@+id/tv_tenphim_goiy"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="HARRY POTTER VÀ HOÀNG TỬ LAI"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:textAllCaps="true"/>
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_ngaychieu_goiy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ngày chiếu:"
-                android:textColor="@color/white" />
+                <LinearLayout
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_tenphim_goiy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="HARRY POTTER VÀ HOÀNG TỬ LAI"
+                        android:textAllCaps="true"
+                        android:textColor="#FFEB3B"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_ngaychieu_goiy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Ngày chiếu:"
+                        android:textColor="#FFEB3B"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_datve_goiy"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:text="Đặt vé"
+                    android:shadowRadius="10"
+                    android:layout_marginLeft="55dp"
+                    android:shadowColor="#fff"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:textColor="#fff"
+                    android:textAllCaps="false"
+                    android:background="@drawable/background_button"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerHorizontal="true"/>
+
+            </LinearLayout>
 
         </LinearLayout>
-
 
         <TextView
             android:id="@+id/tv_title_all_film"
@@ -87,6 +121,7 @@
             android:layout_height="wrap_content"
             android:text="Đang chiếu"
             android:textSize="20dp"
+            android:layout_marginTop="25dp"
             android:shadowRadius="10"
             android:shadowDy="5"
             android:shadowDx="5"

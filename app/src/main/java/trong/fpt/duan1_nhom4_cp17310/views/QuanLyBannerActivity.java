@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -31,10 +32,10 @@ import trong.fpt.duan1_nhom4_cp17310.R;
 import trong.fpt.duan1_nhom4_cp17310.models.Banners;
 
 public class QuanLyBannerActivity extends AppCompatActivity implements OnItemClickBannerManager {
-    private ImageView iv_trangchu;
+    private ImageView iv_trangchu_banner;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FloatingActionButton flt_insert_banner;
+    private ImageButton flt_insert_banner;
     private RecyclerView rv_banner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +43,9 @@ public class QuanLyBannerActivity extends AppCompatActivity implements OnItemCli
         setContentView(R.layout.activity_quan_ly_banner);
         flt_insert_banner = findViewById(R.id.btn_insert_banner);
         rv_banner = findViewById(R.id.rv_banner);
-        iv_trangchu = findViewById(R.id.iv_trangchu);
+        iv_trangchu_banner = findViewById(R.id.iv_trangchu_banner);
 
-        iv_trangchu.setOnClickListener(new View.OnClickListener() {
+        iv_trangchu_banner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(QuanLyBannerActivity.this,MainActivity.class);
@@ -57,20 +58,6 @@ public class QuanLyBannerActivity extends AppCompatActivity implements OnItemCli
             public void onClick(View view) {
                 Intent intent = new Intent(QuanLyBannerActivity.this, InsertBannerActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        rv_banner.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-            }
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                if(dy > 0   && flt_insert_banner.isShown()){
-                    flt_insert_banner.hide();
-                }else{
-                    flt_insert_banner.show();
-                }
             }
         });
     }

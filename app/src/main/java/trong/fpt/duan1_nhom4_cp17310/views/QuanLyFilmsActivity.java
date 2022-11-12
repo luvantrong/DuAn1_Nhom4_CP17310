@@ -10,6 +10,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,28 +34,27 @@ import trong.fpt.duan1_nhom4_cp17310.models.Film;
 
 public class QuanLyFilmsActivity extends AppCompatActivity implements OnItemClickFilmManager {
 
+    private ImageView iv_trangchu_films;
+
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FloatingActionButton btn_insert_film;
+    private ImageButton btn_insert_film;
     private RecyclerView rv_manager_film;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quan_ly_films);
+        iv_trangchu_films = findViewById(R.id.iv_trangchu_films);
 
         btn_insert_film = findViewById(R.id.btn_insert_film);
         rv_manager_film = findViewById(R.id.rv_film);
 
-        rv_manager_film.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+        iv_trangchu_films.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-            }
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                if(dy > 0   && btn_insert_film.isShown()){
-                    btn_insert_film.hide();
-                }else{
-                    btn_insert_film.show();
-                }
+            public void onClick(View v) {
+                Intent i = new Intent(QuanLyFilmsActivity.this,MainActivity.class);
+                startActivity(i);
             }
         });
 
