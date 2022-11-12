@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +44,7 @@ public class FragmentTrangChu extends Fragment  {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private TextView tv_tenphim_goiy, tv_ngaychieu_goiy;
     private List<Banners> mList;
+    private List<Film> filmList;
     private Handler mHanler = new Handler(Looper.getMainLooper());
     private Runnable mRunnable = new Runnable() {
         @Override
@@ -59,6 +61,7 @@ public class FragmentTrangChu extends Fragment  {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        filmList = new ArrayList<>();
     }
 
     @Nullable
@@ -116,6 +119,9 @@ public class FragmentTrangChu extends Fragment  {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
+                Film film = filmList.get(position);
+                tv_tenphim_goiy.setText(film.getTenFilm());
+                tv_ngaychieu_goiy.setText(film.getNgayChieu());
             }
         });
 
@@ -200,6 +206,7 @@ public class FragmentTrangChu extends Fragment  {
                                 Film film = new Film(tenPhim, ngayKhoiChieu, giaVe, linkAnh);
                                 film.setIdFilm(document.getId());
                                 list.add(film);
+                                filmList.add(film);
                             }
                             AdapterGoiYTrangChu adapter = new AdapterGoiYTrangChu(list);
                             vp_goiy.setAdapter(adapter);
