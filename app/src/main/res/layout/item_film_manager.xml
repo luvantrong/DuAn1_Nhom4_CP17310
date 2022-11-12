@@ -58,7 +58,7 @@
         android:layout_below="@id/imv_film_manager"
         android:layout_height="wrap_content"
         android:text="Delete"
-        android:background="@drawable/background_button"
+        android:background="#1AFFFFFF"
         android:textColor="#fff"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
