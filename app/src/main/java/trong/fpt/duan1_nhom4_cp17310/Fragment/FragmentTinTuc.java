@@ -27,12 +27,23 @@ public class FragmentTinTuc extends Fragment {
         btn_tintuc = view.findViewById(R.id.btn_tintuc);
         btn_maps = view.findViewById(R.id.btn_maps);
 
-        getFragmentManager().beginTransaction().replace(R.id.fr_tintuc, new FragmentKhac()).commit();
+        getFragmentManager().beginTransaction().replace(R.id.fr_tintuc, new FragmentTinTuc_Item()).commit();
+
+        btn_tintuc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.fr_tintuc, new FragmentTinTuc_Item()).commit();
+                btn_tintuc.setVisibility(View.GONE);
+                btn_maps.setVisibility(View.VISIBLE);
+            }
+        });
         
         btn_maps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.fr_tintuc, FragmentMaps.newInstance("FPT Polytechnic Ho Chi Minh")).commit();
+                getFragmentManager().beginTransaction().replace(R.id.fr_tintuc, FragmentMaps.newInstance("CGV Vincom Gò Vấp")).commit();
+                btn_tintuc.setVisibility(View.VISIBLE);
+                btn_maps.setVisibility(View.GONE);
             }
         });
 

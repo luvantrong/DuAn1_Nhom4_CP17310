@@ -16,13 +16,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
 import trong.fpt.duan1_nhom4_cp17310.R;
 
-public class FragmentMaps extends Fragment {
+public class FragmentMaps extends Fragment implements GoogleMap.OnMarkerClickListener{
 
     private String addres;
 
@@ -55,7 +56,7 @@ public class FragmentMaps extends Fragment {
                 //Lấy lat long cho vào map
                 LatLng fPoly = new LatLng(location.getLatitude(), location.getLongitude());
 
-                googleMap.addMarker(new MarkerOptions().position(fPoly).title("CGV"));
+                googleMap.addMarker(new MarkerOptions().position(fPoly).title("CGV Vincom Gò Vấp").snippet("CGV Vincom Gò Vấp. Tầng 5 TTTM Vincom Plaza Gò Vấp, 12 Phan Văn Trị, Phường 7, Quận Gò Vấp"));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(fPoly, 15));
 
             }catch (Exception e){
@@ -63,6 +64,17 @@ public class FragmentMaps extends Fragment {
             }
         }
     };
+
+
+    @Override
+    public boolean onMarkerClick(@NonNull Marker marker) {
+        Integer clickCount = (Integer) marker.getTag();
+        if (clickCount != null) {
+            clickCount = clickCount + 1;
+            marker.setTag(clickCount);
+        }
+        return false;
+    }
 
     @Nullable
     @Override

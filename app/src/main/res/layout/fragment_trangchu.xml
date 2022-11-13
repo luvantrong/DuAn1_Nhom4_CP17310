@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="35dp">
+        android:paddingBottom="70dp">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_sl_Top"
@@ -84,6 +84,7 @@
                         android:textAllCaps="true"
                         android:textColor="#FFEB3B"
                         android:textSize="15dp"
+                        android:fontFamily="@font/nunito_bold"
                         android:textStyle="bold" />
 
                     <TextView
@@ -93,7 +94,8 @@
                         android:layout_marginLeft="10dp"
                         android:text="Ngày chiếu:"
                         android:textColor="#FFEB3B"
-                        android:textSize="16dp" />
+                        android:textSize="16dp"
+                        android:fontFamily="@font/nunito_bold"/>
                 </LinearLayout>
 
                 <Button
@@ -140,19 +142,39 @@
             android:layout_below="@+id/tv_title_all_film" />
 
         <Button
+            android:id="@+id/btn_xem_all_film"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="30dp"
             android:textColor="#fff"
+            android:layout_marginBottom="10dp"
             android:text="Xem thêm    > > > > >"
-            android:layout_marginBottom="40dp"
             android:layout_below="@id/rv_all_film"
             android:background="@drawable/background_button_xemthem"/>
 
+        <TextView
+            android:id="@+id/tv_tintuc_dienanh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tin tức điện ảnh"
+            android:layout_marginBottom="10dp"
+            android:textSize="20dp"
+            android:shadowRadius="10"
+            android:shadowDy="5"
+            android:shadowDx="5"
+            android:shadowColor="#fff"
+            android:layout_marginLeft="15dp"
+            android:textColor="#fff"
+            android:layout_below="@+id/btn_xem_all_film"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_tintuc_trangchu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_tintuc_dienanh"/>
 
     </RelativeLayout>
-
 
 </ScrollView>

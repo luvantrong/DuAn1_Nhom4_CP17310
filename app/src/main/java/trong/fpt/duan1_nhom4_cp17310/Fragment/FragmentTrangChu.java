@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
@@ -31,16 +32,18 @@ import me.relex.circleindicator.CircleIndicator3;
 import trong.fpt.duan1_nhom4_cp17310.Adapters.AdapterBannerTrangChu;
 import trong.fpt.duan1_nhom4_cp17310.Adapters.AdapterFilmTrangChu;
 import trong.fpt.duan1_nhom4_cp17310.Adapters.AdapterGoiYTrangChu;
+import trong.fpt.duan1_nhom4_cp17310.Adapters.AdapterTinTucTrangChu;
 import trong.fpt.duan1_nhom4_cp17310.R;
 import trong.fpt.duan1_nhom4_cp17310.models.Banners;
 import trong.fpt.duan1_nhom4_cp17310.models.Film;
+import trong.fpt.duan1_nhom4_cp17310.models.News;
 import trong.fpt.duan1_nhom4_cp17310.models.Pager2_GateTransformer;
 
 public class FragmentTrangChu extends Fragment  {
 
     private ViewPager2 viewPager2, vp_goiy;
     private CircleIndicator3 circleIndicator3;
-    private RecyclerView rv_all_film;
+    private RecyclerView rv_all_film, rv_tintuc_trangchu;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private TextView tv_tenphim_goiy, tv_ngaychieu_goiy;
     private List<Banners> mList;
@@ -74,6 +77,8 @@ public class FragmentTrangChu extends Fragment  {
         tv_ngaychieu_goiy = view.findViewById(R.id.tv_ngaychieu_goiy);
         circleIndicator3 = view.findViewById(R.id.circleIndicator);
         rv_all_film = view.findViewById(R.id.rv_all_film);
+        rv_tintuc_trangchu = view.findViewById(R.id.rv_tintuc_trangchu);
+
         //setting viewpager2
         viewPager2.setOffscreenPageLimit(3);
         viewPager2.setClipToPadding(false);
@@ -120,8 +125,6 @@ public class FragmentTrangChu extends Fragment  {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
                 int current = vp_goiy.getCurrentItem();
                 vp_goiy.setCurrentItem(current);
-//                Animation ani = AnimationUtils.loadAnimation(getContext(), R.anim.anim_goiy);
-//                vp_goiy.startAnimation(ani);
             }
         });
 
@@ -206,12 +209,39 @@ public class FragmentTrangChu extends Fragment  {
                 });
     }
 
+    private void getDataTinTuc() {
+        db.collection("news")
+                .limit(5)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            ArrayList<News> list = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> map = document.getData();
+                                String linkAnh = map.get("linkAnh").toString();
+                                String title = map.get("title").toString();
+                                String linkWeb = map.get("linkWeb").toString();
+                                News news = new News(linkAnh, title, linkWeb);
+                                list.add(news);
+                            }
+                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                            rv_tintuc_trangchu.setLayoutManager(layoutManager);
+                            AdapterTinTucTrangChu adapter = new AdapterTinTucTrangChu(getContext(), list);
+                            rv_tintuc_trangchu.setAdapter(adapter);
+                        }
+                    }
+                });
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         getDataBanner();
         getDataFilm();
         getDataFilm2();
+        getDataTinTuc();
     }
 
 

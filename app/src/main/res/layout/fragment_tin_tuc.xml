@@ -5,22 +5,24 @@
 
     <Button
         android:id="@+id/btn_tintuc"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Điện ảnh"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentTop="true"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/btn_maps"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bản đồ"
-        android:layout_alignParentRight="true"/>
+        android:text="CGV Vincom Gò Vấp"
+        android:layout_alignParentTop="true"
+        android:visibility="visible"/>
 
     <FrameLayout
         android:id="@+id/fr_tintuc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/btn_tintuc"/>
+       />
 
 </RelativeLayout>
