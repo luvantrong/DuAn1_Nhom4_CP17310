@@ -13,19 +13,19 @@ public class Pager2_GateTransformer implements ViewPager2.PageTransformer {
     public void transformPage(@NonNull View page, float position) {
         page.setTranslationX(-position*page.getWidth());
         if (position<-1){    // [-Infinity,-1)
-            // This page is way off-screen to the left.
+            // This page is way off-screen to the left
             page.setAlpha(0);
         }
         else if (position<=0){    // [-1,0]
             page.setAlpha(1);
             page.setPivotX(0);
-            page.setPivotY(1);
+            page.setPivotY((float) (0.6*page.getHeight()));
             page.setRotationY(10*Math.abs(position));
         }
         else if (position <=4){    // (0,1]
             page.setAlpha(1);
             page.setPivotX(page.getWidth());
-            page.setPivotY(1);
+            page.setPivotY((float) (0.6*page.getHeight()));
             page.setRotationY(-10*Math.abs(position));
         }
         else {    // (1,+Infinity]

@@ -53,15 +53,16 @@
             android:layout_height="360dp"
             android:layout_below="@+id/tv_title_top_film"
             android:layout_marginTop="0dp"
-            android:background="@color/black"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/blog_blackadam__large">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/vp_goiy"
                 android:layout_width="match_parent"
-                android:layout_height="280dp"
+                android:layout_height="300dp"
                 android:layout_marginTop="15dp"
                 android:paddingStart="-350dp"
+
                 android:paddingEnd="-350dp" />
 
             <LinearLayout
