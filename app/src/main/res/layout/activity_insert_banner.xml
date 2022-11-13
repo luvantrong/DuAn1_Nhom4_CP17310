@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#403C3C"
+    android:background="#161616"
     tools:context=".views.InsertBannerActivity">
 
     <TextView
@@ -88,7 +88,7 @@
                 android:id="@+id/btn_insert_banner"
                 android:layout_width="wrap_content"
                 android:textColor="#fff"
-                android:background="#1AFFFFFF"
+                android:background="@drawable/background_button_tintuc"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:text="Thêm"/>
@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
-                android:background="#1AFFFFFF"
+                android:background="@drawable/background_button_tintuc"
                 android:layout_marginTop="40dp"
                 android:layout_marginLeft="150dp"
                 android:text="Hủy"/>

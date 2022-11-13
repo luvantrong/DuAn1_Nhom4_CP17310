@@ -32,7 +32,7 @@
         <TextView
             android:id="@+id/tv_name_film"
             android:layout_width="wrap_content"
-            android:layout_height="110dp"
+            android:layout_height="80dp"
             android:textStyle="bold"
             android:text="Black Adam"
             android:layout_toRightOf="@+id/cv_item_film_manager"
@@ -52,7 +52,7 @@
             android:layout_below="@+id/tv_name_film"
             android:textSize="20sp"
             android:textColor="#fff"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="15dp"/>
 
         <TextView
             android:id="@+id/tv_price_film"
@@ -65,7 +65,7 @@
             android:layout_below="@+id/tv_date_film"
             android:textSize="20sp"
             android:textColor="#fff"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="15dp"/>
 
         <Button
             android:id="@+id/btn_delete_film_manager"
@@ -73,11 +73,11 @@
             android:layout_below="@id/tv_price_film"
             android:layout_height="35dp"
             android:text="Delete"
-            android:background="@drawable/background_button"
+            android:background="@drawable/background_button_tintuc"
             android:textColor="#fff"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="200dp"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="30dp" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
