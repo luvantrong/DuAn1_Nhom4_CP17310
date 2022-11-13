@@ -1,6 +1,7 @@
 package trong.fpt.duan1_nhom4_cp17310.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -23,6 +24,7 @@ import trong.fpt.duan1_nhom4_cp17310.ViewHolder.BannerViewHolder;
 import trong.fpt.duan1_nhom4_cp17310.ViewHolder.TinTucViewHolder;
 import trong.fpt.duan1_nhom4_cp17310.models.Banners;
 import trong.fpt.duan1_nhom4_cp17310.models.News;
+import trong.fpt.duan1_nhom4_cp17310.views.WebviewActivity;
 
 public class AdapterTinTuc extends RecyclerView.Adapter<TinTucViewHolder> {
     Context context;
@@ -46,10 +48,23 @@ public class AdapterTinTuc extends RecyclerView.Adapter<TinTucViewHolder> {
         String imageLink = news.getLinkAnh();
         new DownloadImageFromInternet(holder.imv_tintuc).execute(imageLink);
 
+        holder.tv_xemthem_tintuc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), WebviewActivity.class);
+                intent.putExtra("linkWeb", news.getLinkWeb());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                view.getContext().startActivity(intent);
+            }
+        });
+
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
-                Toast.makeText(view.getContext(), "Tin tức", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(view.getContext(), WebviewActivity.class);
+                intent.putExtra("linkWeb", news.getLinkWeb());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                view.getContext().startActivity(intent);
             }
         });
     }
