@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,17 +34,20 @@ import trong.fpt.duan1_nhom4_cp17310.Adapters.AdapterBannerTrangChu;
 import trong.fpt.duan1_nhom4_cp17310.Adapters.AdapterFilmTrangChu;
 import trong.fpt.duan1_nhom4_cp17310.Adapters.AdapterGoiYTrangChu;
 import trong.fpt.duan1_nhom4_cp17310.Adapters.AdapterTinTucTrangChu;
+import trong.fpt.duan1_nhom4_cp17310.Interfaces.SetSelectedItemMenuBottom;
 import trong.fpt.duan1_nhom4_cp17310.R;
 import trong.fpt.duan1_nhom4_cp17310.models.Banners;
 import trong.fpt.duan1_nhom4_cp17310.models.Film;
 import trong.fpt.duan1_nhom4_cp17310.models.News;
 import trong.fpt.duan1_nhom4_cp17310.models.Pager2_GateTransformer;
+import trong.fpt.duan1_nhom4_cp17310.views.MainActivity;
 
 public class FragmentTrangChu extends Fragment  {
 
     private ViewPager2 viewPager2, vp_goiy;
     private CircleIndicator3 circleIndicator3;
     private RecyclerView rv_all_film, rv_tintuc_trangchu;
+    private Button btn_xem_all_film;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private TextView tv_tenphim_goiy, tv_ngaychieu_goiy;
     private List<Banners> mList;
@@ -78,6 +82,16 @@ public class FragmentTrangChu extends Fragment  {
         circleIndicator3 = view.findViewById(R.id.circleIndicator);
         rv_all_film = view.findViewById(R.id.rv_all_film);
         rv_tintuc_trangchu = view.findViewById(R.id.rv_tintuc_trangchu);
+        btn_xem_all_film = view.findViewById(R.id.btn_xem_all_film);
+
+        btn_xem_all_film.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.fr_main, new FragmentDatVe()).commit();
+                SetSelectedItemMenuBottom setSelectedItemMenuBottom = (SetSelectedItemMenuBottom) view.getContext();
+                setSelectedItemMenuBottom.onSelected();
+            }
+        });
 
         //setting viewpager2
         viewPager2.setOffscreenPageLimit(3);

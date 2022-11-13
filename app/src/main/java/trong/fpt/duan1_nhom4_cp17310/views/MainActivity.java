@@ -15,10 +15,12 @@ import trong.fpt.duan1_nhom4_cp17310.Fragment.FragmentKhac;
 import trong.fpt.duan1_nhom4_cp17310.Fragment.FragmentQuanLy;
 import trong.fpt.duan1_nhom4_cp17310.Fragment.FragmentTinTuc;
 import trong.fpt.duan1_nhom4_cp17310.Fragment.FragmentTrangChu;
+import trong.fpt.duan1_nhom4_cp17310.Interfaces.SetSelectedItemMenuBottom;
 import trong.fpt.duan1_nhom4_cp17310.R;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, SetSelectedItemMenuBottom {
 
+    public BottomNavigationView navigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         loadFragment(new FragmentTrangChu());
 
-        BottomNavigationView navigation = findViewById(R.id.navigation_bottom);
+        navigation = findViewById(R.id.navigation_bottom);
         navigation.setOnNavigationItemSelectedListener(this);
     }
 
@@ -64,5 +66,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onSelected() {
+        navigation.setSelectedItemId(R.id.datve);
     }
 }
