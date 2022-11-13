@@ -103,23 +103,6 @@ public class FragmentTrangChu extends Fragment  {
         //setting viewpager goi y
 
         vp_goiy.setOffscreenPageLimit(3);
-        vp_goiy.setClipToPadding(false);
-        vp_goiy.setClipChildren(false);
-
-//
-//
-//        CompositePageTransformer compositePageTransformer2 = new CompositePageTransformer();
-//        compositePageTransformer2.addTransformer(new MarginPageTransformer(20));
-//
-//        compositePageTransformer2.addTransformer(new ViewPager2.PageTransformer() {
-//            @Override
-//            public void transformPage(@NonNull View page, float position) {
-//                float r = 1 - Math.abs(position);
-//                page.setScaleY(0.8f + r * 0.2f);
-//
-//            }
-//        });
-
         vp_goiy.setPageTransformer(new Pager2_GateTransformer());
         vp_goiy.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -128,7 +111,6 @@ public class FragmentTrangChu extends Fragment  {
                 Film film = filmList.get(position);
                 tv_tenphim_goiy.setText(film.getTenFilm());
                 tv_ngaychieu_goiy.setText(film.getNgayChieu());
-
             }
         });
 
