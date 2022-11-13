@@ -53,16 +53,16 @@
             android:layout_height="360dp"
             android:layout_below="@+id/tv_title_top_film"
             android:layout_marginTop="0dp"
-            android:background="@drawable/adam"
+            android:background="@color/black"
             android:orientation="vertical">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/vp_goiy"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="280dp"
                 android:layout_marginTop="15dp"
-                android:paddingStart="90dp"
-                android:paddingEnd="90dp" />
+                android:paddingStart="-350dp"
+                android:paddingEnd="-350dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
