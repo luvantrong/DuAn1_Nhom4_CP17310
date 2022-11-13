@@ -171,6 +171,7 @@ public class FragmentTrangChu extends Fragment  {
 
     private void getDataFilm() {
         db.collection("films")
+                .limit(6)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

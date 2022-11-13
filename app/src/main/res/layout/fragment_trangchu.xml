@@ -138,6 +138,8 @@
             android:id="@+id/rv_all_film"
             android:layout_width="match_parent"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_title_all_film" />
 
