@@ -1,5 +1,6 @@
 package trong.fpt.duan1_nhom4_cp17310.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -41,17 +42,19 @@ import trong.fpt.duan1_nhom4_cp17310.models.Film;
 import trong.fpt.duan1_nhom4_cp17310.models.News;
 import trong.fpt.duan1_nhom4_cp17310.models.Pager2_GateTransformer;
 import trong.fpt.duan1_nhom4_cp17310.views.MainActivity;
+import trong.fpt.duan1_nhom4_cp17310.views.TicketsActivity;
 
 public class FragmentTrangChu extends Fragment  {
 
     private ViewPager2 viewPager2, vp_goiy;
     private CircleIndicator3 circleIndicator3;
     private RecyclerView rv_all_film, rv_tintuc_trangchu;
-    private Button btn_xem_all_film;
+    private Button btn_xem_all_film, btn_datve_goiy;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private TextView tv_tenphim_goiy, tv_ngaychieu_goiy;
     private List<Banners> mList;
     private List<Film> filmList;
+    private int index_goiy;
     private Handler mHanler = new Handler(Looper.getMainLooper());
     private Runnable mRunnable = new Runnable() {
         @Override
@@ -83,13 +86,23 @@ public class FragmentTrangChu extends Fragment  {
         rv_all_film = view.findViewById(R.id.rv_all_film);
         rv_tintuc_trangchu = view.findViewById(R.id.rv_tintuc_trangchu);
         btn_xem_all_film = view.findViewById(R.id.btn_xem_all_film);
-
+        btn_datve_goiy = view.findViewById(R.id.btn_datve_goiy);
         btn_xem_all_film.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getFragmentManager().beginTransaction().replace(R.id.fr_main, new FragmentDatVe()).commit();
                 SetSelectedItemMenuBottom setSelectedItemMenuBottom = (SetSelectedItemMenuBottom) view.getContext();
                 setSelectedItemMenuBottom.onSelected();
+            }
+        });
+
+        btn_datve_goiy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), TicketsActivity.class);
+                intent.putExtra("thongTinPhim", filmList.get(index_goiy));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                view.getContext().startActivity(intent);
             }
         });
 
@@ -130,6 +143,7 @@ public class FragmentTrangChu extends Fragment  {
                 Film film = filmList.get(position);
                 tv_tenphim_goiy.setText(film.getTenFilm());
                 tv_ngaychieu_goiy.setText(film.getNgayChieu());
+                index_goiy = position;
             }
         });
 

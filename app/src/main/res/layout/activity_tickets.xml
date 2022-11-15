@@ -12,17 +12,20 @@
        android:layout_width="wrap_content"
        android:orientation="vertical"
        android:gravity="center"
-       android:layout_height="wrap_content">
+       android:layout_height="wrap_content"
+       android:layout_centerHorizontal="true">
 
        <ImageView
-           android:layout_marginTop="20dp"
-           android:layout_width="wrap_content"
-           android:layout_height="300dp"
-           android:src="@drawable/tc"
+           android:id="@+id/imv_ticket"
+           android:layout_width="150dp"
+           android:layout_marginTop="30dp"
+           android:background="#202020"
+           android:layout_height="200dp"
+           android:scaleType="fitXY"
            android:contentDescription="TODO" />
 
        <TextView
-           android:id="@+id/tv_tenphim"
+           android:id="@+id/tv_tenphim_ticket"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="Tên Phim"
@@ -33,48 +36,107 @@
            android:shadowDy="5"
            android:shadowDx="5"
            android:shadowColor="#ccc"
-           android:textStyle="italic"/>
+           android:textStyle="italic"
+           />
 
-       <com.google.android.material.textfield.TextInputLayout
-           android:id="@+id/TextInputLayOutName"
-           style="@style/LoginTextInputLayoutStyle"
-           android:layout_width="320dp"
-           android:layout_marginTop="25dp"
-           app:counterEnabled="true"
-           app:endIconMode="clear_text"
-           app:errorEnabled="true"
-           android:textColorHint="#fff"
-           android:layout_height="60dp"
-           app:startIconTint="#fff">
-
-           <com.google.android.material.textfield.TextInputEditText
-               android:id="@+id/ip_chonngay"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="Chọn Ngày Xem"
-               android:textColor="#fff"
-               android:inputType="text"
-               tools:ignore="TouchTargetSizeCheck" />
-       </com.google.android.material.textfield.TextInputLayout>
-
-       <Spinner
-           android:id="@+id/spn_chongio"
-           android:layout_width="320dp"
-           android:layout_height="48dp"
-           android:layout_marginTop="20dp" />
    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ln_chonngay_xem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/ln"
+        android:layout_marginLeft="20dp">
+
+        <Button
+            android:id="@+id/btn_chonngay_xem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chọn ngày xem"/>
+
+        <TextView
+            android:id="@+id/tv_chonngay_xem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ln_chon_suat_xem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ln_chonngay_xem">
+
+        <TextView
+            android:id="@+id/tv_chon_suat_xem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chọn suất xem"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginLeft="20dp"
+            android:visibility="gone"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_chon_suat_xem"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:visibility="gone"
+                >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ln_chon_soluong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/ln_chon_suat_xem"
+        android:layout_marginLeft="20sp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_soluong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Số lượng vé"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edt_soluong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:hint="Nhập số lượng vé"
+            android:textColorHint="@android:color/darker_gray"/>
+
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="45dp"
         android:layout_marginRight="45dp"
-        android:layout_below="@+id/ln"
-        android:orientation="horizontal">
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
 
         <Button
+            android:id="@+id/btn_ticket"
             android:layout_width="120dp"
-            android:layout_marginTop="80dp"
             android:background="@drawable/background_button_tintuc"
             android:text="Đặt vé"
             android:textColor="#fff"
@@ -85,8 +147,8 @@
             android:layout_height="wrap_content"/>
 
         <Button
+            android:id="@+id/btn_cancel_ticket"
             android:layout_width="120dp"
-            android:layout_marginTop="80dp"
             android:layout_marginLeft="80dp"
             android:background="@drawable/background_button_tintuc"
             android:text="Hủy vé"
