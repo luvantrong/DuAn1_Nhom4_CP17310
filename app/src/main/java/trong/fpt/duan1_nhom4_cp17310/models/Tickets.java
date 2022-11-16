@@ -8,6 +8,7 @@ public class Tickets {
     private String ngayXem;
     private String giaVe;
     private String idTickets;
+    private SoGhe soGhe;
 
     public Tickets(String tenPhim, String suatXem, String soLuong, String tenNguoiDat, String ngayXem, String giaVe) {
         this.tenPhim = tenPhim;
@@ -16,6 +17,16 @@ public class Tickets {
         this.tenNguoiDat = tenNguoiDat;
         this.ngayXem = ngayXem;
         this.giaVe = giaVe;
+    }
+
+    public Tickets(String tenPhim, String suatXem, String soLuong, String tenNguoiDat, String ngayXem, String giaVe, SoGhe soGhe) {
+        this.tenPhim = tenPhim;
+        this.suatXem = suatXem;
+        this.soLuong = soLuong;
+        this.tenNguoiDat = tenNguoiDat;
+        this.ngayXem = ngayXem;
+        this.giaVe = giaVe;
+        this.soGhe = soGhe;
     }
 
     public String getTenPhim() {
@@ -72,5 +83,13 @@ public class Tickets {
 
     public void setIdTickets(String idTickets) {
         this.idTickets = idTickets;
+    }
+
+    public SoGhe getSoGhe() {
+        return soGhe;
+    }
+
+    public void setSoGhe(SoGhe soGhe) {
+        this.soGhe = soGhe;
     }
 }
