@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="170dp"
             android:scaleType="fitXY"
-            android:id="@+id/im_im"/>
+            android:id="@+id/im_im" />
 
     </androidx.cardview.widget.CardView>
 

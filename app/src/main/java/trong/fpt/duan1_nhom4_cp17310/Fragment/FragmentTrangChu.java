@@ -107,19 +107,19 @@ public class FragmentTrangChu extends Fragment  {
         });
 
         //setting viewpager2
-        viewPager2.setOffscreenPageLimit(3);
-        viewPager2.setClipToPadding(false);
-        viewPager2.setClipChildren(false);
+//        viewPager2.setOffscreenPageLimit(3);
+//        viewPager2.setClipToPadding(false);
+//        viewPager2.setClipChildren(false);
 
-        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
-        compositePageTransformer.addTransformer(new MarginPageTransformer(40));
-        viewPager2.setPageTransformer(compositePageTransformer);
+//        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
+//        compositePageTransformer.addTransformer(new MarginPageTransformer(40));
+//        viewPager2.setPageTransformer(compositePageTransformer);
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 mHanler.removeCallbacks(mRunnable);
-                mHanler.postDelayed(mRunnable, 4000);
+                mHanler.postDelayed(mRunnable, 3000);
             }
         });
 
