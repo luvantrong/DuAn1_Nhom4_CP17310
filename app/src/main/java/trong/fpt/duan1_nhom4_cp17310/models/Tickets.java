@@ -9,6 +9,7 @@ public class Tickets {
     private String giaVe;
     private String idTickets;
     private SoGhe soGhe;
+    private String maGhe;
 
     public Tickets(String tenPhim, String suatXem, String soLuong, String tenNguoiDat, String ngayXem, String giaVe) {
         this.tenPhim = tenPhim;
@@ -19,7 +20,7 @@ public class Tickets {
         this.giaVe = giaVe;
     }
 
-    public Tickets(String tenPhim, String suatXem, String soLuong, String tenNguoiDat, String ngayXem, String giaVe, SoGhe soGhe) {
+    public Tickets(String tenPhim, String suatXem, String soLuong, String tenNguoiDat, String ngayXem, String giaVe, SoGhe soGhe, String maGhe) {
         this.tenPhim = tenPhim;
         this.suatXem = suatXem;
         this.soLuong = soLuong;
@@ -27,6 +28,7 @@ public class Tickets {
         this.ngayXem = ngayXem;
         this.giaVe = giaVe;
         this.soGhe = soGhe;
+        this.maGhe = maGhe;
     }
 
     public String getTenPhim() {

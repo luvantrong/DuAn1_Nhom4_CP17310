@@ -350,6 +350,7 @@ public class TicketsActivity extends AppCompatActivity {
                 String t_tenPhim = film.getTenFilm();
                 SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_STATUS", Context.MODE_PRIVATE);
                 String t_tenTaiKhoan = sharedPreferences.getString("email", "");
+                String t_maGhe = soGheHienThi;
 
                 Map<String, Object> tickets = new HashMap<>();
                 tickets.put("giaVe", t_giaVe);
@@ -359,6 +360,7 @@ public class TicketsActivity extends AppCompatActivity {
                 tickets.put("tenPhim", t_tenPhim);
                 tickets.put("tenTaiKhoan", t_tenTaiKhoan);
                 tickets.put("SoGhe", soGhe);
+                tickets.put("maGhe", t_maGhe);
 
                 // Add a new document with a generated ID
                 db.collection("tickets")
@@ -391,8 +393,6 @@ public class TicketsActivity extends AppCompatActivity {
                         });
             }
         });
-
-
     }
 
     private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
@@ -496,13 +496,14 @@ public class TicketsActivity extends AppCompatActivity {
                                 String soLuong = map.get("soLuong").toString();
                                 String suatXem = map.get("suatXem").toString();
                                 String tenTaiKhoan = map.get("tenTaiKhoan").toString();
-
+                                String maGhe = map.get("maGhe").toString();
 
                                 Map<String, Object> mapSoGhe = (Map<String, Object>) document.get("SoGhe");
                                 String soGhe = mapSoGhe.get("soGhe").toString();
                                 String trangThai = mapSoGhe.get("trangThai").toString();
                                 SoGhe soGhe1 = new SoGhe(Integer.parseInt(soGhe), Integer.parseInt(trangThai));
-                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1);
+
+                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1, maGhe);
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat8h.add(tickets);
                             }
@@ -560,12 +561,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 String soLuong = map.get("soLuong").toString();
                                 String suatXem = map.get("suatXem").toString();
                                 String tenTaiKhoan = map.get("tenTaiKhoan").toString();
+                                String maGhe = map.get("maGhe").toString();
 
                                 Map<String, Object> mapSoGhe = (Map<String, Object>) document.get("SoGhe");
                                 String soGhe = mapSoGhe.get("soGhe").toString();
                                 String trangThai = mapSoGhe.get("trangThai").toString();
                                 SoGhe soGhe1 = new SoGhe(Integer.parseInt(soGhe), Integer.parseInt(trangThai));
-                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1);
+                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1, maGhe);
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat9h.add(tickets);
                             }
@@ -623,11 +625,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 String soLuong = map.get("soLuong").toString();
                                 String suatXem = map.get("suatXem").toString();
                                 String tenTaiKhoan = map.get("tenTaiKhoan").toString();
+                                String maGhe = map.get("maGhe").toString();
+
                                 Map<String, Object> mapSoGhe = (Map<String, Object>) document.get("SoGhe");
                                 String soGhe = mapSoGhe.get("soGhe").toString();
                                 String trangThai = mapSoGhe.get("trangThai").toString();
                                 SoGhe soGhe1 = new SoGhe(Integer.parseInt(soGhe), Integer.parseInt(trangThai));
-                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1);
+                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1, maGhe);
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat10h.add(tickets);
                             }
@@ -683,11 +687,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 String soLuong = map.get("soLuong").toString();
                                 String suatXem = map.get("suatXem").toString();
                                 String tenTaiKhoan = map.get("tenTaiKhoan").toString();
+                                String maGhe = map.get("maGhe").toString();
+
                                 Map<String, Object> mapSoGhe = (Map<String, Object>) document.get("SoGhe");
                                 String soGhe = mapSoGhe.get("soGhe").toString();
                                 String trangThai = mapSoGhe.get("trangThai").toString();
                                 SoGhe soGhe1 = new SoGhe(Integer.parseInt(soGhe), Integer.parseInt(trangThai));
-                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1);
+                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1, maGhe);
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat11h.add(tickets);
                             }
@@ -743,12 +749,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 String soLuong = map.get("soLuong").toString();
                                 String suatXem = map.get("suatXem").toString();
                                 String tenTaiKhoan = map.get("tenTaiKhoan").toString();
+                                String maGhe = map.get("maGhe").toString();
 
                                 Map<String, Object> mapSoGhe = (Map<String, Object>) document.get("SoGhe");
                                 String soGhe = mapSoGhe.get("soGhe").toString();
                                 String trangThai = mapSoGhe.get("trangThai").toString();
                                 SoGhe soGhe1 = new SoGhe(Integer.parseInt(soGhe), Integer.parseInt(trangThai));
-                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1);
+                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1, maGhe);
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat13h.add(tickets);
                             }
@@ -808,12 +815,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 String soLuong = map.get("soLuong").toString();
                                 String suatXem = map.get("suatXem").toString();
                                 String tenTaiKhoan = map.get("tenTaiKhoan").toString();
+                                String maGhe = map.get("maGhe").toString();
 
                                 Map<String, Object> mapSoGhe = (Map<String, Object>) document.get("SoGhe");
                                 String soGhe = mapSoGhe.get("soGhe").toString();
                                 String trangThai = mapSoGhe.get("trangThai").toString();
                                 SoGhe soGhe1 = new SoGhe(Integer.parseInt(soGhe), Integer.parseInt(trangThai));
-                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1);
+                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1, maGhe);
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat14h.add(tickets);
                             }
@@ -869,12 +877,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 String soLuong = map.get("soLuong").toString();
                                 String suatXem = map.get("suatXem").toString();
                                 String tenTaiKhoan = map.get("tenTaiKhoan").toString();
+                                String maGhe = map.get("maGhe").toString();
 
                                 Map<String, Object> mapSoGhe = (Map<String, Object>) document.get("SoGhe");
                                 String soGhe = mapSoGhe.get("soGhe").toString();
                                 String trangThai = mapSoGhe.get("trangThai").toString();
                                 SoGhe soGhe1 = new SoGhe(Integer.parseInt(soGhe), Integer.parseInt(trangThai));
-                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1);
+                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1, maGhe);
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat15h.add(tickets);
                             }
@@ -930,12 +939,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 String soLuong = map.get("soLuong").toString();
                                 String suatXem = map.get("suatXem").toString();
                                 String tenTaiKhoan = map.get("tenTaiKhoan").toString();
+                                String maGhe = map.get("maGhe").toString();
 
                                 Map<String, Object> mapSoGhe = (Map<String, Object>) document.get("SoGhe");
                                 String soGhe = mapSoGhe.get("soGhe").toString();
                                 String trangThai = mapSoGhe.get("trangThai").toString();
                                 SoGhe soGhe1 = new SoGhe(Integer.parseInt(soGhe), Integer.parseInt(trangThai));
-                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1);
+                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1, maGhe);
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat16h.add(tickets);
                             }
@@ -991,12 +1001,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 String soLuong = map.get("soLuong").toString();
                                 String suatXem = map.get("suatXem").toString();
                                 String tenTaiKhoan = map.get("tenTaiKhoan").toString();
+                                String maGhe = map.get("maGhe").toString();
 
                                 Map<String, Object> mapSoGhe = (Map<String, Object>) document.get("SoGhe");
                                 String soGhe = mapSoGhe.get("soGhe").toString();
                                 String trangThai = mapSoGhe.get("trangThai").toString();
                                 SoGhe soGhe1 = new SoGhe(Integer.parseInt(soGhe), Integer.parseInt(trangThai));
-                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1);
+                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1, maGhe);
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat17h.add(tickets);
                             }
@@ -1052,12 +1063,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 String soLuong = map.get("soLuong").toString();
                                 String suatXem = map.get("suatXem").toString();
                                 String tenTaiKhoan = map.get("tenTaiKhoan").toString();
+                                String maGhe = map.get("maGhe").toString();
 
                                 Map<String, Object> mapSoGhe = (Map<String, Object>) document.get("SoGhe");
                                 String soGhe = mapSoGhe.get("soGhe").toString();
                                 String trangThai = mapSoGhe.get("trangThai").toString();
                                 SoGhe soGhe1 = new SoGhe(Integer.parseInt(soGhe), Integer.parseInt(trangThai));
-                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1);
+                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1, maGhe);
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat18h.add(tickets);
                             }
@@ -1113,12 +1125,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 String soLuong = map.get("soLuong").toString();
                                 String suatXem = map.get("suatXem").toString();
                                 String tenTaiKhoan = map.get("tenTaiKhoan").toString();
+                                String maGhe = map.get("maGhe").toString();
 
                                 Map<String, Object> mapSoGhe = (Map<String, Object>) document.get("SoGhe");
                                 String soGhe = mapSoGhe.get("soGhe").toString();
                                 String trangThai = mapSoGhe.get("trangThai").toString();
                                 SoGhe soGhe1 = new SoGhe(Integer.parseInt(soGhe), Integer.parseInt(trangThai));
-                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1);
+                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1, maGhe);
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat19h.add(tickets);
                             }
@@ -1174,12 +1187,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 String soLuong = map.get("soLuong").toString();
                                 String suatXem = map.get("suatXem").toString();
                                 String tenTaiKhoan = map.get("tenTaiKhoan").toString();
+                                String maGhe = map.get("maGhe").toString();
 
                                 Map<String, Object> mapSoGhe = (Map<String, Object>) document.get("SoGhe");
                                 String soGhe = mapSoGhe.get("soGhe").toString();
                                 String trangThai = mapSoGhe.get("trangThai").toString();
                                 SoGhe soGhe1 = new SoGhe(Integer.parseInt(soGhe), Integer.parseInt(trangThai));
-                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1);
+                                Tickets tickets = new Tickets(tenPhim, suatXem, soLuong, tenTaiKhoan, ngayXemPhim, giaVe, soGhe1, maGhe);
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat20h.add(tickets);
                             }
