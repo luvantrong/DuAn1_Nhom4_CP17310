@@ -18,7 +18,6 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,18 +30,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Map;
 
-import trong.fpt.duan1_nhom4_cp17310.Adapters.AdapterBannerTrangChu;
-import trong.fpt.duan1_nhom4_cp17310.Adapters.AdapterFilmTrangChu;
 import trong.fpt.duan1_nhom4_cp17310.Adapters.AdapterSuatXem;
-import trong.fpt.duan1_nhom4_cp17310.Fragment.FragmentDatVe;
 import trong.fpt.duan1_nhom4_cp17310.Interfaces.ItemClickListenerSuatXem;
-import trong.fpt.duan1_nhom4_cp17310.Interfaces.SetSelectedItemMenuBottom;
 import trong.fpt.duan1_nhom4_cp17310.R;
-import trong.fpt.duan1_nhom4_cp17310.ViewHolder.SuatXemViewHolder;
-import trong.fpt.duan1_nhom4_cp17310.models.Banners;
 import trong.fpt.duan1_nhom4_cp17310.models.Film;
 import trong.fpt.duan1_nhom4_cp17310.models.SuatXem;
 import trong.fpt.duan1_nhom4_cp17310.models.Tickets;
@@ -134,52 +126,52 @@ public class TicketsActivity extends AppCompatActivity {
             @Override
             public void onClick(String s) {
                 Log.d("TAG", "Selected: " + s);
-                if(s.equals("08:00")){
-                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 -soLuongSuat8h));
+                if (s.equals("08:00")) {
+                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 - soLuongSuat8h));
                 }
 
-                if(s.equals("09:00")){
-                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 -soLuongSuat9h));
+                if (s.equals("09:00")) {
+                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 - soLuongSuat9h));
                 }
 
-                if(s.equals("10:00")){
-                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 -soLuongSuat10h));
+                if (s.equals("10:00")) {
+                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 - soLuongSuat10h));
                 }
 
-                if(s.equals("11:00")){
-                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 -soLuongSuat11h));
+                if (s.equals("11:00")) {
+                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 - soLuongSuat11h));
                 }
 
-                if(s.equals("13:00")){
-                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 -soLuongSuat13h));
+                if (s.equals("13:00")) {
+                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 - soLuongSuat13h));
                 }
 
-                if(s.equals("14:00")){
-                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 -soLuongSuat14h));
+                if (s.equals("14:00")) {
+                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 - soLuongSuat14h));
                 }
 
-                if(s.equals("15:00")){
-                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 -soLuongSuat15h));
+                if (s.equals("15:00")) {
+                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 - soLuongSuat15h));
                 }
 
-                if(s.equals("16:00")){
-                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 -soLuongSuat16h));
+                if (s.equals("16:00")) {
+                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 - soLuongSuat16h));
                 }
 
-                if(s.equals("17:00")){
-                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 -soLuongSuat17h));
+                if (s.equals("17:00")) {
+                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 - soLuongSuat17h));
                 }
 
-                if(s.equals("18:00")){
-                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 -soLuongSuat18h));
+                if (s.equals("18:00")) {
+                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 - soLuongSuat18h));
                 }
 
-                if(s.equals("19:00")){
-                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 -soLuongSuat19h));
+                if (s.equals("19:00")) {
+                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 - soLuongSuat19h));
                 }
 
-                if(s.equals("20:00")){
-                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 -soLuongSuat20h));
+                if (s.equals("20:00")) {
+                    tv_soluong.setText("Số lượng ghế còn lại: " + (50 - soLuongSuat20h));
                 }
 
                 ln_chon_soluong.setVisibility(View.VISIBLE);
@@ -245,10 +237,6 @@ public class TicketsActivity extends AppCompatActivity {
         return dsSuatXem;
     }
 
-
-
-
-
     DatePickerDialog.OnDateSetListener ngayXem = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
@@ -261,24 +249,24 @@ public class TicketsActivity extends AppCompatActivity {
             tv_chon_suat_xem.setVisibility(View.VISIBLE);
             rv_chon_suat_xem.setVisibility(View.VISIBLE);
 
-            getDataPhimSuat8h(film.getTenFilm(),sdf.format(c.getTime()), "08:00");
-            getDataPhimSuat9h(film.getTenFilm(),sdf.format(c.getTime()), "09:00");
-            getDataPhimSuat10h(film.getTenFilm(),sdf.format(c.getTime()), "10:00");
-            getDataPhimSuat11h(film.getTenFilm(),sdf.format(c.getTime()), "11:00");
-            getDataPhimSuat13h(film.getTenFilm(),sdf.format(c.getTime()), "13:00");
-            getDataPhimSuat14h(film.getTenFilm(),sdf.format(c.getTime()), "14:00");
-            getDataPhimSuat15h(film.getTenFilm(),sdf.format(c.getTime()), "15:00");
-            getDataPhimSuat16h(film.getTenFilm(),sdf.format(c.getTime()), "16:00");
-            getDataPhimSuat17h(film.getTenFilm(),sdf.format(c.getTime()), "17:00");
-            getDataPhimSuat18h(film.getTenFilm(),sdf.format(c.getTime()), "18:00");
-            getDataPhimSuat19h(film.getTenFilm(),sdf.format(c.getTime()), "19:00");
-            getDataPhimSuat20h(film.getTenFilm(),sdf.format(c.getTime()), "20:00");
+            getDataPhimSuat8h(film.getTenFilm(), sdf.format(c.getTime()), "08:00");
+            getDataPhimSuat9h(film.getTenFilm(), sdf.format(c.getTime()), "09:00");
+            getDataPhimSuat10h(film.getTenFilm(), sdf.format(c.getTime()), "10:00");
+            getDataPhimSuat11h(film.getTenFilm(), sdf.format(c.getTime()), "11:00");
+            getDataPhimSuat13h(film.getTenFilm(), sdf.format(c.getTime()), "13:00");
+            getDataPhimSuat14h(film.getTenFilm(), sdf.format(c.getTime()), "14:00");
+            getDataPhimSuat15h(film.getTenFilm(), sdf.format(c.getTime()), "15:00");
+            getDataPhimSuat16h(film.getTenFilm(), sdf.format(c.getTime()), "16:00");
+            getDataPhimSuat17h(film.getTenFilm(), sdf.format(c.getTime()), "17:00");
+            getDataPhimSuat18h(film.getTenFilm(), sdf.format(c.getTime()), "18:00");
+            getDataPhimSuat19h(film.getTenFilm(), sdf.format(c.getTime()), "19:00");
+            getDataPhimSuat20h(film.getTenFilm(), sdf.format(c.getTime()), "20:00");
 
             btn_chonngay_xem.setEnabled(false);
         }
     };
 
-    private void getDataPhimSuat8h(String tenPhim, String ngayXem, String suatXem){
+    private void getDataPhimSuat8h(String tenPhim, String ngayXem, String suatXem) {
         db.collection("tickets")
                 .whereEqualTo("tenPhim", tenPhim)
                 .whereEqualTo("ngayXemPhim", ngayXem)
@@ -300,13 +288,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat8h.add(tickets);
                             }
-                            if(dsTicketsSuat8h.size()==0){
+                            if (dsTicketsSuat8h.size() == 0) {
                                 soLuongSuat8h = 0;
-                            }else {
-                                for (int i=0; i<dsTicketsSuat8h.size();i++){
+                            } else {
+                                for (int i = 0; i < dsTicketsSuat8h.size(); i++) {
                                     Tickets tickets = dsTicketsSuat8h.get(i);
                                     int soLuong = Integer.parseInt(tickets.getSoLuong());
-                                    soLuongSuat8h+=soLuong;
+                                    soLuongSuat8h += soLuong;
                                 }
                             }
 
@@ -325,7 +313,7 @@ public class TicketsActivity extends AppCompatActivity {
                 });
     }
 
-    private void getDataPhimSuat9h(String tenPhim, String ngayXem, String suatXem){
+    private void getDataPhimSuat9h(String tenPhim, String ngayXem, String suatXem) {
         db.collection("tickets")
                 .whereEqualTo("tenPhim", tenPhim)
                 .whereEqualTo("ngayXemPhim", ngayXem)
@@ -347,13 +335,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat9h.add(tickets);
                             }
-                            if(dsTicketsSuat9h.size()==0){
+                            if (dsTicketsSuat9h.size() == 0) {
                                 soLuongSuat9h = 0;
-                            }else {
-                                for (int i=0; i<dsTicketsSuat9h.size();i++){
+                            } else {
+                                for (int i = 0; i < dsTicketsSuat9h.size(); i++) {
                                     Tickets tickets = dsTicketsSuat9h.get(i);
                                     int soLuong = Integer.parseInt(tickets.getSoLuong());
-                                    soLuongSuat9h+=soLuong;
+                                    soLuongSuat9h += soLuong;
                                 }
                             }
 
@@ -372,7 +360,7 @@ public class TicketsActivity extends AppCompatActivity {
                 });
     }
 
-    private void getDataPhimSuat10h(String tenPhim, String ngayXem, String suatXem){
+    private void getDataPhimSuat10h(String tenPhim, String ngayXem, String suatXem) {
         db.collection("tickets")
                 .whereEqualTo("tenPhim", tenPhim)
                 .whereEqualTo("ngayXemPhim", ngayXem)
@@ -394,13 +382,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat10h.add(tickets);
                             }
-                            if(dsTicketsSuat10h.size()==0){
+                            if (dsTicketsSuat10h.size() == 0) {
                                 soLuongSuat10h = 0;
-                            }else {
-                                for (int i=0; i<dsTicketsSuat10h.size();i++){
+                            } else {
+                                for (int i = 0; i < dsTicketsSuat10h.size(); i++) {
                                     Tickets tickets = dsTicketsSuat10h.get(i);
                                     int soLuong = Integer.parseInt(tickets.getSoLuong());
-                                    soLuongSuat10h+=soLuong;
+                                    soLuongSuat10h += soLuong;
                                 }
                             }
 
@@ -419,7 +407,7 @@ public class TicketsActivity extends AppCompatActivity {
                 });
     }
 
-    private void getDataPhimSuat11h(String tenPhim, String ngayXem, String suatXem){
+    private void getDataPhimSuat11h(String tenPhim, String ngayXem, String suatXem) {
         db.collection("tickets")
                 .whereEqualTo("tenPhim", tenPhim)
                 .whereEqualTo("ngayXemPhim", ngayXem)
@@ -441,13 +429,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat11h.add(tickets);
                             }
-                            if(dsTicketsSuat11h.size()==0){
+                            if (dsTicketsSuat11h.size() == 0) {
                                 soLuongSuat11h = 0;
-                            }else {
-                                for (int i=0; i<dsTicketsSuat11h.size();i++){
+                            } else {
+                                for (int i = 0; i < dsTicketsSuat11h.size(); i++) {
                                     Tickets tickets = dsTicketsSuat11h.get(i);
                                     int soLuong = Integer.parseInt(tickets.getSoLuong());
-                                    soLuongSuat11h+=soLuong;
+                                    soLuongSuat11h += soLuong;
                                 }
                             }
 
@@ -466,7 +454,7 @@ public class TicketsActivity extends AppCompatActivity {
                 });
     }
 
-    private void getDataPhimSuat13h(String tenPhim, String ngayXem, String suatXem){
+    private void getDataPhimSuat13h(String tenPhim, String ngayXem, String suatXem) {
         db.collection("tickets")
                 .whereEqualTo("tenPhim", tenPhim)
                 .whereEqualTo("ngayXemPhim", ngayXem)
@@ -489,17 +477,17 @@ public class TicketsActivity extends AppCompatActivity {
                                 dsTicketsSuat13h.add(tickets);
                             }
 
-                            if(dsTicketsSuat13h.size()==0){
+                            if (dsTicketsSuat13h.size() == 0) {
                                 soLuongSuat13h = 0;
-                            }else {
-                                for (int i=0; i<dsTicketsSuat13h.size();i++){
+                            } else {
+                                for (int i = 0; i < dsTicketsSuat13h.size(); i++) {
                                     Tickets tickets = dsTicketsSuat13h.get(i);
                                     int soLuong = Integer.parseInt(tickets.getSoLuong());
-                                    soLuongSuat13h+=soLuong;
+                                    soLuongSuat13h += soLuong;
                                 }
                             }
 
-                            Log.d("SL", soLuongSuat13h+"");
+                            Log.d("SL", soLuongSuat13h + "");
 
                             if (soLuongSuat13h == 50) {
                                 for (int i = 0; i < dsSuatXem.size(); i++) {
@@ -517,7 +505,7 @@ public class TicketsActivity extends AppCompatActivity {
                 });
     }
 
-    private void getDataPhimSuat14h(String tenPhim, String ngayXem, String suatXem){
+    private void getDataPhimSuat14h(String tenPhim, String ngayXem, String suatXem) {
         db.collection("tickets")
                 .whereEqualTo("tenPhim", tenPhim)
                 .whereEqualTo("ngayXemPhim", ngayXem)
@@ -539,13 +527,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat14h.add(tickets);
                             }
-                            if(dsTicketsSuat14h.size()==0){
+                            if (dsTicketsSuat14h.size() == 0) {
                                 soLuongSuat14h = 0;
-                            }else {
-                                for (int i=0; i<dsTicketsSuat14h.size();i++){
+                            } else {
+                                for (int i = 0; i < dsTicketsSuat14h.size(); i++) {
                                     Tickets tickets = dsTicketsSuat14h.get(i);
                                     int soLuong = Integer.parseInt(tickets.getSoLuong());
-                                    soLuongSuat14h+=soLuong;
+                                    soLuongSuat14h += soLuong;
                                 }
                             }
 
@@ -564,7 +552,7 @@ public class TicketsActivity extends AppCompatActivity {
                 });
     }
 
-    private void getDataPhimSuat15h(String tenPhim, String ngayXem, String suatXem){
+    private void getDataPhimSuat15h(String tenPhim, String ngayXem, String suatXem) {
         db.collection("tickets")
                 .whereEqualTo("tenPhim", tenPhim)
                 .whereEqualTo("ngayXemPhim", ngayXem)
@@ -586,13 +574,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat15h.add(tickets);
                             }
-                            if(dsTicketsSuat15h.size()==0){
+                            if (dsTicketsSuat15h.size() == 0) {
                                 soLuongSuat15h = 0;
-                            }else {
-                                for (int i=0; i<dsTicketsSuat15h.size();i++){
+                            } else {
+                                for (int i = 0; i < dsTicketsSuat15h.size(); i++) {
                                     Tickets tickets = dsTicketsSuat15h.get(i);
                                     int soLuong = Integer.parseInt(tickets.getSoLuong());
-                                    soLuongSuat15h+=soLuong;
+                                    soLuongSuat15h += soLuong;
                                 }
                             }
 
@@ -611,7 +599,7 @@ public class TicketsActivity extends AppCompatActivity {
                 });
     }
 
-    private void getDataPhimSuat16h(String tenPhim, String ngayXem, String suatXem){
+    private void getDataPhimSuat16h(String tenPhim, String ngayXem, String suatXem) {
         db.collection("tickets")
                 .whereEqualTo("tenPhim", tenPhim)
                 .whereEqualTo("ngayXemPhim", ngayXem)
@@ -633,13 +621,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat16h.add(tickets);
                             }
-                            if(dsTicketsSuat16h.size()==0){
+                            if (dsTicketsSuat16h.size() == 0) {
                                 soLuongSuat16h = 0;
-                            }else {
-                                for (int i=0; i<dsTicketsSuat16h.size();i++){
+                            } else {
+                                for (int i = 0; i < dsTicketsSuat16h.size(); i++) {
                                     Tickets tickets = dsTicketsSuat16h.get(i);
                                     int soLuong = Integer.parseInt(tickets.getSoLuong());
-                                    soLuongSuat16h+=soLuong;
+                                    soLuongSuat16h += soLuong;
                                 }
                             }
 
@@ -658,7 +646,7 @@ public class TicketsActivity extends AppCompatActivity {
                 });
     }
 
-    private void getDataPhimSuat17h(String tenPhim, String ngayXem, String suatXem){
+    private void getDataPhimSuat17h(String tenPhim, String ngayXem, String suatXem) {
         db.collection("tickets")
                 .whereEqualTo("tenPhim", tenPhim)
                 .whereEqualTo("ngayXemPhim", ngayXem)
@@ -680,13 +668,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat17h.add(tickets);
                             }
-                            if(dsTicketsSuat17h.size()==0){
+                            if (dsTicketsSuat17h.size() == 0) {
                                 soLuongSuat17h = 0;
-                            }else {
-                                for (int i=0; i<dsTicketsSuat17h.size();i++){
+                            } else {
+                                for (int i = 0; i < dsTicketsSuat17h.size(); i++) {
                                     Tickets tickets = dsTicketsSuat17h.get(i);
                                     int soLuong = Integer.parseInt(tickets.getSoLuong());
-                                    soLuongSuat17h+=soLuong;
+                                    soLuongSuat17h += soLuong;
                                 }
                             }
 
@@ -705,7 +693,7 @@ public class TicketsActivity extends AppCompatActivity {
                 });
     }
 
-    private void getDataPhimSuat18h(String tenPhim, String ngayXem, String suatXem){
+    private void getDataPhimSuat18h(String tenPhim, String ngayXem, String suatXem) {
         db.collection("tickets")
                 .whereEqualTo("tenPhim", tenPhim)
                 .whereEqualTo("ngayXemPhim", ngayXem)
@@ -727,13 +715,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat18h.add(tickets);
                             }
-                            if(dsTicketsSuat18h.size()==0){
+                            if (dsTicketsSuat18h.size() == 0) {
                                 soLuongSuat18h = 0;
-                            }else {
-                                for (int i=0; i<dsTicketsSuat18h.size();i++){
+                            } else {
+                                for (int i = 0; i < dsTicketsSuat18h.size(); i++) {
                                     Tickets tickets = dsTicketsSuat18h.get(i);
                                     int soLuong = Integer.parseInt(tickets.getSoLuong());
-                                    soLuongSuat18h+=soLuong;
+                                    soLuongSuat18h += soLuong;
                                 }
                             }
 
@@ -752,7 +740,7 @@ public class TicketsActivity extends AppCompatActivity {
                 });
     }
 
-    private void getDataPhimSuat19h(String tenPhim, String ngayXem, String suatXem){
+    private void getDataPhimSuat19h(String tenPhim, String ngayXem, String suatXem) {
         db.collection("tickets")
                 .whereEqualTo("tenPhim", tenPhim)
                 .whereEqualTo("ngayXemPhim", ngayXem)
@@ -774,13 +762,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat19h.add(tickets);
                             }
-                            if(dsTicketsSuat19h.size()==0){
+                            if (dsTicketsSuat19h.size() == 0) {
                                 soLuongSuat19h = 0;
-                            }else {
-                                for (int i=0; i<dsTicketsSuat19h.size();i++){
+                            } else {
+                                for (int i = 0; i < dsTicketsSuat19h.size(); i++) {
                                     Tickets tickets = dsTicketsSuat19h.get(i);
                                     int soLuong = Integer.parseInt(tickets.getSoLuong());
-                                    soLuongSuat19h+=soLuong;
+                                    soLuongSuat19h += soLuong;
                                 }
                             }
 
@@ -799,7 +787,7 @@ public class TicketsActivity extends AppCompatActivity {
                 });
     }
 
-    private void getDataPhimSuat20h(String tenPhim, String ngayXem, String suatXem){
+    private void getDataPhimSuat20h(String tenPhim, String ngayXem, String suatXem) {
         db.collection("tickets")
                 .whereEqualTo("tenPhim", tenPhim)
                 .whereEqualTo("ngayXemPhim", ngayXem)
@@ -821,13 +809,13 @@ public class TicketsActivity extends AppCompatActivity {
                                 tickets.setIdTickets(document.getId());
                                 dsTicketsSuat20h.add(tickets);
                             }
-                            if(dsTicketsSuat20h.size()==0){
+                            if (dsTicketsSuat20h.size() == 0) {
                                 soLuongSuat20h = 0;
-                            }else {
-                                for (int i=0; i<dsTicketsSuat20h.size();i++){
+                            } else {
+                                for (int i = 0; i < dsTicketsSuat20h.size(); i++) {
                                     Tickets tickets = dsTicketsSuat20h.get(i);
                                     int soLuong = Integer.parseInt(tickets.getSoLuong());
-                                    soLuongSuat20h+=soLuong;
+                                    soLuongSuat20h += soLuong;
                                 }
                             }
 
