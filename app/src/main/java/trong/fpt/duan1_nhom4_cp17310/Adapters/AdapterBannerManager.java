@@ -28,6 +28,7 @@ public class AdapterBannerManager extends RecyclerView.Adapter<BannerViewHolder>
     public AdapterBannerManager(Context context, ArrayList<Banners> dsBanners) {
         this.context = context;
         this.dsBanners = dsBanners;
+
     }
 
     @NonNull

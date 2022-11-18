@@ -1,5 +1,9 @@
 package trong.fpt.duan1_nhom4_cp17310.views;
 
+import static trong.fpt.duan1_nhom4_cp17310.Services.LoginService.LOGIN_SERVICE_ACTION_LOGIN;
+import static trong.fpt.duan1_nhom4_cp17310.Services.LoginService.LOGIN_SERVICE_ACTION_SAVE_ACCOUNT;
+import static trong.fpt.duan1_nhom4_cp17310.Services.LoginService.LOGIN_SERVICE_EVENT;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -7,10 +11,14 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
@@ -61,6 +69,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import trong.fpt.duan1_nhom4_cp17310.R;
+import trong.fpt.duan1_nhom4_cp17310.Services.LoginService;
 import trong.fpt.duan1_nhom4_cp17310.models.Users;
 
 public class LoginActivity extends AppCompatActivity {
@@ -84,7 +93,6 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mFirebaseAuth;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,56 +105,6 @@ public class LoginActivity extends AppCompatActivity {
         editTextInputLayOutName = findViewById(R.id.EditTextInputLayOutName);
         editTextInputLayOutPass = findViewById(R.id.EditTextInputLayOutPass);
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String tenTaiKhoan = editTextInputLayOutName.getText().toString();
-                String matKhau = editTextInputLayOutPass.getText().toString();
-
-                if(tenTaiKhoan.length() ==0 || matKhau.length() ==0){
-                    new AlertDialog.Builder(LoginActivity.this)
-                            .setTitle("Thông báo")
-                            .setMessage("Bạn phải nhập đầy đủ thông tin: \n- Tên tài khoản\n- Mật khẩu")
-                            .setIcon(R.drawable.attention_warning_14525)
-                            .setPositiveButton("OK", null)
-                            .show();
-                } else {
-                    ArrayList<Users> list = new ArrayList<>();
-                    db.collection("users")
-                            .whereEqualTo("tenTaiKhoan", tenTaiKhoan)
-                            .whereEqualTo("matKhau", matKhau)
-                            .get()
-                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        for (QueryDocumentSnapshot document : task.getResult()) {
-                                            Map<String, Object> map = document.getData();
-                                            String tenTaiKhoan = map.get("tenTaiKhoan").toString();
-                                            String matKhau = map.get("matKhau").toString();
-                                            Integer loaiTaiKhoan = Integer.valueOf(map.get("loaiTaiKhoan").toString());
-                                            Users users = new Users(tenTaiKhoan, matKhau, loaiTaiKhoan);
-                                            list.add(users);
-                                        }
-                                        if(list.size()==0){
-                                            new AlertDialog.Builder(LoginActivity.this)
-                                                    .setTitle("Thông báo")
-                                                    .setMessage("Sai thông tin tài khoản")
-                                                    .setIcon(R.drawable.attention_warning_14525)
-                                                    .setPositiveButton("OK", null)
-                                                    .show();
-                                        }else{
-                                            writeLogin(list.get(0));
-                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                            startActivity(intent);
-                                        }
-                                    }
-                                }
-                            });
-                }
-
-            }
-        });
 
         tv_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,9 +118,9 @@ public class LoginActivity extends AppCompatActivity {
         chkShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(compoundButton.isChecked()){
+                if (compoundButton.isChecked()) {
                     tietPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }else {
+                } else {
                     tietPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
             }
@@ -241,6 +199,70 @@ public class LoginActivity extends AppCompatActivity {
          */
     }
 
+    public void onLoginClick(View view) {
+        String tenTaiKhoan = editTextInputLayOutName.getText().toString();
+        String matKhau = editTextInputLayOutPass.getText().toString();
+        if (tenTaiKhoan.length() == 0 || matKhau.length() == 0) {
+            new AlertDialog.Builder(LoginActivity.this)
+                    .setTitle("Thông báo")
+                    .setMessage("Bạn phải nhập đầy đủ thông tin: \n- Tên tài khoản\n- Mật khẩu")
+                    .setIcon(R.drawable.attention_warning_14525)
+                    .setPositiveButton("OK", null)
+                    .show();
+        } else {
+            Intent intent = new Intent(LoginActivity.this, LoginService.class);
+            intent.setAction(LOGIN_SERVICE_ACTION_LOGIN);
+            intent.putExtra("tenTaiKhoan", tenTaiKhoan);
+            intent.putExtra("matKhau", matKhau);
+            startService(intent);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(loginReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(loginFBGGReceiver);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        readLogin();
+        IntentFilter intentFilter = new IntentFilter(LOGIN_SERVICE_EVENT);
+        LocalBroadcastManager.getInstance(this).registerReceiver(loginReceiver, intentFilter);
+        LocalBroadcastManager.getInstance(this).registerReceiver(loginFBGGReceiver, intentFilter);
+
+    }
+
+    private BroadcastReceiver loginReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+           Users users = (Users) intent.getSerializableExtra("result");
+            if (users == null) {
+                new AlertDialog.Builder(LoginActivity.this)
+                        .setTitle("Thông báo")
+                        .setMessage("Sai thông tin tài khoản")
+                        .setIcon(R.drawable.attention_warning_14525)
+                        .setPositiveButton("OK", null)
+                        .show();
+            } else {
+                writeLogin(users);
+                Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent1);
+            }
+        }
+    };
+
+    private BroadcastReceiver loginFBGGReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+        }
+    };
+
+
     ActivityResultLauncher<Intent> googleLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -256,7 +278,12 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d(">>>TAG", "onActivityResult: " + email);
                         //Chuyển qua màn hình MainActivity
                         if (account != null) {
-                            insertUser(email, matKhau, loaiTaiKhoan);
+                            Intent intentSV = new Intent(LoginActivity.this, LoginService.class);
+                            intentSV.setAction(LOGIN_SERVICE_ACTION_SAVE_ACCOUNT);
+                            intentSV.putExtra("name", email);
+                            intentSV.putExtra("matKhau", matKhau);
+                            intentSV.putExtra("loaiTaiKhoan", loaiTaiKhoan);
+                            startService(intentSV);
                             Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(homeIntent);
                             finish();
@@ -281,8 +308,16 @@ public class LoginActivity extends AppCompatActivity {
                             String name = user.getEmail();
                             String matKhau = "";
                             int loaiTaiKhoan = 0;
+
+                            Intent intentSV = new Intent(LoginActivity.this, LoginService.class);
+                            intentSV.setAction(LOGIN_SERVICE_ACTION_SAVE_ACCOUNT);
+                            intentSV.putExtra("name", name);
+                            intentSV.putExtra("matKhau", matKhau);
+                            intentSV.putExtra("loaiTaiKhoan", loaiTaiKhoan);
+                            startService(intentSV);
+
                             writeLogin(new Users(name, matKhau, loaiTaiKhoan));
-                            insertUser(name, matKhau, loaiTaiKhoan);
+
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -315,7 +350,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void writeLogin(Users users){
+    private void writeLogin(Users users) {
         SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_STATUS", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("isLoggedIn", true);
@@ -323,88 +358,14 @@ public class LoginActivity extends AppCompatActivity {
         editor.commit();
     }
 
-    private void readLogin(){
+    private void readLogin() {
         SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_STATUS", MODE_PRIVATE);
         Boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
         String email = sharedPreferences.getString("email", "email");
-        if(isLoggedIn){
+        if (isLoggedIn) {
             Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent1);
         }
     }
 
-    private void insertUser(String user, String passWord, int loaiTaiKhoan) {
-        ArrayList<Users> list = new ArrayList<>();
-        db.collection("users")
-                .whereEqualTo("tenTaiKhoan", user)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Map<String, Object> map = document.getData();
-                                String tenTaiKhoan = map.get("tenTaiKhoan").toString();
-                                String matKhau = map.get("matKhau").toString();
-                                Integer loaiTaiKhoan = Integer.valueOf(map.get("loaiTaiKhoan").toString());
-                                Users users = new Users(tenTaiKhoan, matKhau, loaiTaiKhoan);
-                                list.add(users);
-                            }
-                            dsTaiKhoan = list;
-                            if (dsTaiKhoan.size() == 0) {
-                                Map<String, Object> users = new HashMap<>();
-                                users.put("tenTaiKhoan", user);
-                                users.put("matKhau", passWord);
-                                users.put("loaiTaiKhoan", 0);
-
-                                db.collection("users")
-                                        .add(users)
-                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                            @Override
-                                            public void onSuccess(DocumentReference documentReference) {
-                                                Toast.makeText(LoginActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(LoginActivity.this, "THêm không thành công", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                            } else {
-                                for (int i = 0; i < dsTaiKhoan.size(); i++) {
-                                    String tenTaiKhoans = dsTaiKhoan.get(i).getTenTaiKhoan();
-                                    if (tenTaiKhoans.equalsIgnoreCase(user)) {
-                                        dem = 1;
-                                        break;
-                                    }
-                                }
-                                if (dem == 0) {
-
-                                    Map<String, Object> users = new HashMap<>();
-                                    users.put("tenTaiKhoan", user);
-                                    users.put("matKhau", passWord);
-                                    users.put("loaiTaiKhoan", loaiTaiKhoan);
-
-                                    db.collection("users")
-                                            .add(user)
-                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                @Override
-                                                public void onSuccess(DocumentReference documentReference) {
-                                                    Toast.makeText(LoginActivity.this, "Inserted", Toast.LENGTH_SHORT).show();
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(LoginActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-                                }
-                            }
-                        }
-                    }
-                });
-    }
 }

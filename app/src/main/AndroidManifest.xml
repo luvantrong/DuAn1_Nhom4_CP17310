@@ -17,6 +17,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuAn1_Nhom4_CP17310"
         tools:targetApi="31">
+        <service
+            android:name=".Services.LoginService"
+            android:exported="false"></service>
+
+        <service
+            android:name=".Services.BannerService"
+            android:exported="false"></service>
+
         <activity
             android:name=".views.WebviewActivity"
             android:exported="false">
