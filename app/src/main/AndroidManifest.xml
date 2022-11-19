@@ -21,10 +21,6 @@
             android:name=".Services.LoginService"
             android:exported="false"></service>
 
-        <service
-            android:name=".Services.BannerService"
-            android:exported="false"></service>
-
         <activity
             android:name=".views.WebviewActivity"
             android:exported="false">
