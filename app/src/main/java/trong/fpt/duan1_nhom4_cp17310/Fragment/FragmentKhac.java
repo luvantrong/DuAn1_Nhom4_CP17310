@@ -81,8 +81,7 @@ public class FragmentKhac extends Fragment {
             public void onClick(View view) {
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LOGIN_STATUS", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.remove("isLoggedIn");
-                editor.remove("email");
+                editor.clear();
                 editor.apply();
                 Intent intent = new Intent(view.getContext(), LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

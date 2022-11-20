@@ -54,9 +54,7 @@ public class ChangePassActivity extends AppCompatActivity {
         btn_changepass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String oldPass = ip_oldPassword.getText().toString();
-                String newPass = ip_oldPassword.getText().toString();
-                String enterNewPass = ip_oldPassword.getText().toString();
+                String newPass = ip_newPassword.getText().toString();
                 SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_STATUS", Context.MODE_PRIVATE);
                 String email = sharedPreferences.getString("email", "");
                 int loaiTaiKhoan = sharedPreferences.getInt("loaiTaiKhoan", 0);
@@ -67,8 +65,6 @@ public class ChangePassActivity extends AppCompatActivity {
                     users.put("matKhau", newPass);
                     users.put("loaiTaiKhoan", loaiTaiKhoan);
                     users.put("tenTaiKhoan", email);
-
-
 
                     db.collection("users")
                             .document(idUser)
@@ -82,8 +78,12 @@ public class ChangePassActivity extends AppCompatActivity {
                                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                                    Intent intent = new Intent(ChangePassActivity.this, LoginActivity.class);
-                                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                    SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_STATUS", Context.MODE_PRIVATE);
+                                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                    editor.clear();
+                                                    editor.apply();
+                                                    Intent intent = new Intent(view.getContext(), LoginActivity.class);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                     startActivity(intent);
                                                     finish();
                                                 }
