@@ -15,13 +15,14 @@ import androidx.fragment.app.Fragment;
 
 import trong.fpt.duan1_nhom4_cp17310.R;
 import trong.fpt.duan1_nhom4_cp17310.views.BookedTicketActivity;
+import trong.fpt.duan1_nhom4_cp17310.views.ChangePassActivity;
 import trong.fpt.duan1_nhom4_cp17310.views.LoginActivity;
 import trong.fpt.duan1_nhom4_cp17310.views.ProfileActivity;
 import trong.fpt.duan1_nhom4_cp17310.views.QuanLyBannerActivity;
 import trong.fpt.duan1_nhom4_cp17310.views.QuanLyFilmsActivity;
 
 public class FragmentKhac extends Fragment {
-    LinearLayout ln_quanlyphim, ln_quanlybanner,ln_thongtinuser, ln_logout,ln_bookedTickets;
+    LinearLayout ln_quanlyphim, ln_quanlybanner,ln_thongtinuser, ln_logout,ln_bookedTickets,ln_changepass;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,7 +33,16 @@ public class FragmentKhac extends Fragment {
         ln_thongtinuser = view.findViewById(R.id.ln_thongtinuser);
         ln_logout = view.findViewById(R.id.ln_logout);
         ln_bookedTickets = view.findViewById(R.id.ln_bookedTickets);
+        ln_changepass = view.findViewById(R.id.ln_changepass);
 
+
+        ln_changepass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), ChangePassActivity.class);
+                startActivity(i);
+            }
+        });
 
         ln_quanlyphim.setOnClickListener(new View.OnClickListener() {
             @Override

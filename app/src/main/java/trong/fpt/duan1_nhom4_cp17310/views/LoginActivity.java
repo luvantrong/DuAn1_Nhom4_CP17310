@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText tietPassword;
     private TextView tv_register;
     private Button btn_login;
+    private  String matKhau = "";
     private TextInputEditText editTextInputLayOutName, editTextInputLayOutPass;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayList<Users> dsTaiKhoan = new ArrayList<>();
@@ -201,7 +202,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginClick(View view) {
         String tenTaiKhoan = editTextInputLayOutName.getText().toString();
-        String matKhau = editTextInputLayOutPass.getText().toString();
+        matKhau = editTextInputLayOutPass.getText().toString();
         if (tenTaiKhoan.length() == 0 || matKhau.length() == 0) {
             new AlertDialog.Builder(LoginActivity.this)
                     .setTitle("Thông báo")
@@ -251,6 +252,7 @@ public class LoginActivity extends AppCompatActivity {
                 writeLogin(users);
                 Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent1);
+
             }
         }
     };
@@ -273,7 +275,7 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         GoogleSignInAccount account = task.getResult(ApiException.class);
                         String email = account.getEmail();
-                        String matKhau = "";
+                        matKhau = "";
                         int loaiTaiKhoan = 0;
                         Log.d(">>>TAG", "onActivityResult: " + email);
                         //Chuyển qua màn hình MainActivity
@@ -306,7 +308,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mFirebaseAuth.getCurrentUser();
                             String name = user.getEmail();
-                            String matKhau = "";
+                            matKhau = "";
                             int loaiTaiKhoan = 0;
 
                             Intent intentSV = new Intent(LoginActivity.this, LoginService.class);
@@ -355,6 +357,9 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("isLoggedIn", true);
         editor.putString("email", users.getTenTaiKhoan());
+        editor.putString("idUser", users.getIdUser());
+        editor.putString("matkhau", users.getMatKhau());
+        editor.putInt("loaiTaiKhoan", users.getLoaiTaiKhoan());
         editor.commit();
     }
 

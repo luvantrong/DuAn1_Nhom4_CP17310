@@ -69,6 +69,7 @@ public class LoginService extends IntentService {
                                             String matKhau = map.get("matKhau").toString();
                                             Integer loaiTaiKhoan = Integer.valueOf(map.get("loaiTaiKhoan").toString());
                                             Users users = new Users(tenTaiKhoan, matKhau, loaiTaiKhoan);
+                                            users.setIdUser(document.getId());
                                             list.add(users);
                                             dsTaiKhoan.add(users);
                                         }
