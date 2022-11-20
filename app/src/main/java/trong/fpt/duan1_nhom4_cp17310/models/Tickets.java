@@ -11,13 +11,14 @@ public class Tickets {
     private SoGhe soGhe;
     private String maGhe;
 
-    public Tickets(String tenPhim, String suatXem, String soLuong, String tenNguoiDat, String ngayXem, String giaVe) {
+    public Tickets(String tenPhim, String suatXem, String soLuong, String tenNguoiDat, String ngayXem, String giaVe, String maGhe) {
         this.tenPhim = tenPhim;
         this.suatXem = suatXem;
         this.soLuong = soLuong;
         this.tenNguoiDat = tenNguoiDat;
         this.ngayXem = ngayXem;
         this.giaVe = giaVe;
+        this.maGhe = maGhe;
     }
 
     public Tickets(String tenPhim, String suatXem, String soLuong, String tenNguoiDat, String ngayXem, String giaVe, SoGhe soGhe, String maGhe) {
@@ -28,6 +29,14 @@ public class Tickets {
         this.ngayXem = ngayXem;
         this.giaVe = giaVe;
         this.soGhe = soGhe;
+        this.maGhe = maGhe;
+    }
+
+    public String getMaGhe() {
+        return maGhe;
+    }
+
+    public void setMaGhe(String maGhe) {
         this.maGhe = maGhe;
     }
 

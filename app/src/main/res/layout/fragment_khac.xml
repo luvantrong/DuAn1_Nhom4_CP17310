@@ -54,6 +54,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ln_bookedTickets"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
