@@ -12,13 +12,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -89,10 +87,10 @@ public class QuanLyBannerActivity extends AppCompatActivity implements OnItemCli
                             AdapterBannerManager adapterBannerManager = new AdapterBannerManager(QuanLyBannerActivity.this, list);
                             rv_banner.setAdapter(adapterBannerManager);
                         }
+
                     }
                 });
     }
-
 
     @Override
     public void onItemClickDelete(Banners banners) {
@@ -113,9 +111,14 @@ public class QuanLyBannerActivity extends AppCompatActivity implements OnItemCli
                                                 .setTitle("Notification")
                                                 .setMessage("Delete successfully")
                                                 .setIcon(R.drawable.attention_warning_14525)
-                                                .setPositiveButton("OK", null)
+                                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                        getData();
+                                                    }
+                                                })
                                                 .show();
-                                        getData();
+
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {

@@ -1,6 +1,8 @@
 package trong.fpt.duan1_nhom4_cp17310.models;
 
-public class Banners {
+import java.io.Serializable;
+
+public class Banners implements Serializable {
 
     private String linkAnh;
     private String moTa;

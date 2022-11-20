@@ -111,7 +111,8 @@
             android:textColor="#fff"
             android:background="@drawable/background_button_tintuc"
             android:text="Login"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:onClick="onLoginClick"/>
 
         <TextView
             android:layout_width="wrap_content"

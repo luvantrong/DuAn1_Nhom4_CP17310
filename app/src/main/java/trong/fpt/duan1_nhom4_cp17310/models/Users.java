@@ -1,6 +1,8 @@
 package trong.fpt.duan1_nhom4_cp17310.models;
 
-public class Users {
+import java.io.Serializable;
+
+public class Users implements Serializable {
 
     private String idUser;
     private String tenTaiKhoan;
