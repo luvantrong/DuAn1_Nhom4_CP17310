@@ -20,9 +20,10 @@ import trong.fpt.duan1_nhom4_cp17310.views.LoginActivity;
 import trong.fpt.duan1_nhom4_cp17310.views.ProfileActivity;
 import trong.fpt.duan1_nhom4_cp17310.views.QuanLyBannerActivity;
 import trong.fpt.duan1_nhom4_cp17310.views.QuanLyFilmsActivity;
+import trong.fpt.duan1_nhom4_cp17310.views.ThongKeActivity;
 
 public class FragmentKhac extends Fragment {
-    LinearLayout ln_quanlyphim, ln_quanlybanner,ln_thongtinuser, ln_logout,ln_bookedTickets,ln_changepass;
+    LinearLayout ln_quanlyphim, ln_quanlybanner,ln_thongtinuser, ln_logout,ln_bookedTickets,ln_changepass, ln_thongke;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class FragmentKhac extends Fragment {
         ln_logout = view.findViewById(R.id.ln_logout);
         ln_bookedTickets = view.findViewById(R.id.ln_bookedTickets);
         ln_changepass = view.findViewById(R.id.ln_changepass);
+        ln_thongke = view.findViewById(R.id.ln_thongke);
 
 
         ln_changepass.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +88,14 @@ public class FragmentKhac extends Fragment {
                 Intent intent = new Intent(view.getContext(), LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+            }
+        });
+
+        ln_thongke.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(), ThongKeActivity.class);
+                startActivity(i);
             }
         });
 

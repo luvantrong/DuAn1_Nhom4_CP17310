@@ -374,8 +374,9 @@ public class TicketsActivity extends AppCompatActivity {
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
-                                                Intent intent = new Intent(TicketsActivity.this, MainActivity.class);
+                                                Intent intent = new Intent(TicketsActivity.this, BookedTicketActivity.class);
                                                 startActivity(intent);
+                                                finish();
                                             }
                                         })
                                         .show();
