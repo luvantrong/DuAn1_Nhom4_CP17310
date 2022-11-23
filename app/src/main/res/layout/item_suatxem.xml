@@ -13,7 +13,7 @@
         android:layoutDirection="rtl"
         android:button="@null"
         android:background="@drawable/bacground_radio_button"
-        android:textColor="@color/black"
+        android:textColor="#fff"
         android:layout_margin="5dp"
          />
 
