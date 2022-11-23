@@ -10,7 +10,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_all"
+        android:background="#161616"
         tools:context=".views.TicketsActivity">
 
         <LinearLayout
@@ -58,17 +58,26 @@
             <Button
                 android:id="@+id/btn_chonngay_xem"
                 android:layout_width="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#1AFFFFFF"
+                android:textColor="#fff"
+                android:layout_marginBottom="10dp"
                 android:layout_height="wrap_content"
                 android:text="Chọn ngày xem"/>
 
             <TextView
                 android:id="@+id/tv_chonngay_xem"
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:text=""
+                android:textStyle="italic|bold"
                 android:textSize="20sp"
                 android:textColor="@color/white"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="20dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -170,7 +179,7 @@
             <Button
                 android:id="@+id/btn_cancel_ticket"
                 android:layout_width="120dp"
-                android:layout_marginLeft="80dp"
+                android:layout_marginLeft="60dp"
                 android:background="@drawable/background_button_tintuc"
                 android:text="Hủy vé"
                 android:textColor="#fff"
