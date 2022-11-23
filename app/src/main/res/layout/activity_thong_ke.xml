@@ -25,8 +25,9 @@
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/barchart"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="500dp"
             android:layout_below="@+id/btn_xemDoanhThu"
+            android:visibility="gone"
             />
 
         <TextView
@@ -37,14 +38,16 @@
             android:layout_below="@+id/barchart"
             android:textSize="18sp"
             android:textColor="@color/black"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            android:visibility="gone"/>
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_thongke"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_title"/>
+            android:layout_below="@+id/tv_title"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

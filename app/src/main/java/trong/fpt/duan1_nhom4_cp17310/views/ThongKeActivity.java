@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -44,6 +45,7 @@ public class ThongKeActivity extends AppCompatActivity {
     private ArrayList<String> dsTenPhim = new ArrayList<>();
     private Button btn_xemDoanhThu;
     private RecyclerView rv_thongke;
+    private TextView tv_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +54,16 @@ public class ThongKeActivity extends AppCompatActivity {
         barchart = findViewById(R.id.barchart);
         btn_xemDoanhThu = findViewById(R.id.btn_xemDoanhThu);
         rv_thongke = findViewById(R.id.rv_thongke);
+        tv_title = findViewById(R.id.tv_title);
 
         getDataFilm();
 
         btn_xemDoanhThu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                barchart.setVisibility(View.VISIBLE);
+                rv_thongke.setVisibility(View.VISIBLE);
+                tv_title.setVisibility(View.VISIBLE);
 
                 ArrayList<PieEntry> visittors2 = new ArrayList<>();
                 for (int i = 0; i < dsThongKe.size(); i++) {
