@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -43,7 +44,7 @@ public class ThongKeActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayList<ThongKe> dsThongKe;
     private ArrayList<String> dsTenPhim = new ArrayList<>();
-    private Button btn_xemDoanhThu;
+    private Button btn_xemDoanhThu, btn_doanhThuTheoNgay;
     private RecyclerView rv_thongke;
     private TextView tv_title;
 
@@ -53,10 +54,21 @@ public class ThongKeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_thong_ke);
         barchart = findViewById(R.id.barchart);
         btn_xemDoanhThu = findViewById(R.id.btn_xemDoanhThu);
+        btn_doanhThuTheoNgay = findViewById(R.id.btn_doanhThuTheoNgay);
         rv_thongke = findViewById(R.id.rv_thongke);
         tv_title = findViewById(R.id.tv_title);
 
         getDataFilm();
+
+        btn_doanhThuTheoNgay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ThongKeActivity.this, ThongKe2Activity.class);
+                intent.putExtra("DanhSachTenPhim", dsTenPhim);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         btn_xemDoanhThu.setOnClickListener(new View.OnClickListener() {
             @Override

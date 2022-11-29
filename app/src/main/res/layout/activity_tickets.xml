@@ -98,7 +98,6 @@
                 android:layout_marginLeft="20dp"
                 android:visibility="gone"/>
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_chon_suat_xem"
                 android:layout_width="match_parent"

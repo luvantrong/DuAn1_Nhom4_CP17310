@@ -340,6 +340,10 @@ public class TicketsActivity extends AppCompatActivity {
         btn_ticket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
+
                 int t_soghe = soGheChon;
                 int t_trangThai = 1;
                 SoGhe soGhe = new SoGhe(t_soghe, t_trangThai);
@@ -351,6 +355,21 @@ public class TicketsActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_STATUS", Context.MODE_PRIVATE);
                 String t_tenTaiKhoan = sharedPreferences.getString("email", "");
                 String t_maGhe = soGheHienThi;
+//
+//                Intent intent1 = new Intent(TicketsActivity.this, PayPalActivity.class);
+//                intent1.putExtra("t_soghe", t_soghe);
+//                intent1.putExtra("soGhe", soGhe);
+//                intent1.putExtra("t_trangThai", t_trangThai);
+//                intent1.putExtra("t_giaVe", t_giaVe);
+//                intent1.putExtra("t_ngayXemPhim", t_ngayXemPhim);
+//                intent1.putExtra("t_soLuong", t_soLuong);
+//                intent1.putExtra("t_suatXem", t_suatXem);
+//                intent1.putExtra("t_tenPhim", t_tenPhim);
+//                intent1.putExtra("t_tenTaiKhoan", t_tenTaiKhoan);
+//                intent1.putExtra("t_maGhe", t_maGhe);
+//                startActivity(intent1);
+//                finish();
+
 
                 Map<String, Object> tickets = new HashMap<>();
                 tickets.put("giaVe", t_giaVe);

@@ -49,7 +49,6 @@ public class ChangePassActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_STATUS", Context.MODE_PRIVATE);
         idUser = sharedPreferences.getString("idUser", "");
         matKhau = sharedPreferences.getString("matkhau", "");
-        Toast.makeText(this, matKhau + "  " + idUser, Toast.LENGTH_SHORT).show();
 
         btn_changepass.setOnClickListener(new View.OnClickListener() {
             @Override

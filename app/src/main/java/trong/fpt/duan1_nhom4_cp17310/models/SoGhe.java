@@ -1,6 +1,8 @@
 package trong.fpt.duan1_nhom4_cp17310.models;
 
-public class SoGhe {
+import java.io.Serializable;
+
+public class SoGhe implements Serializable {
 
     private int soGhe;
     private int trangThai;
