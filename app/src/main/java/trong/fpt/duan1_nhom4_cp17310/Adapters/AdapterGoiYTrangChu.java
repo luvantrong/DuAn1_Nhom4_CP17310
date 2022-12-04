@@ -1,5 +1,6 @@
 package trong.fpt.duan1_nhom4_cp17310.Adapters;
 
+import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import trong.fpt.duan1_nhom4_cp17310.R;
 import trong.fpt.duan1_nhom4_cp17310.models.Film;
+import trong.fpt.duan1_nhom4_cp17310.views.LoginActivity;
 
 public class AdapterGoiYTrangChu extends RecyclerView.Adapter<AdapterGoiYTrangChu.PhotoViewHolder> {
     private final List<Film> mList;
@@ -39,6 +41,16 @@ public class AdapterGoiYTrangChu extends RecyclerView.Adapter<AdapterGoiYTrangCh
         String imageLink = film.getLinkAnh();
         new DownloadImageFromInternet(holder.imgPhoto).execute(imageLink);
 
+        holder.imgPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(v.getContext())
+                        .setTitle("Nội dung phim")
+                            .setMessage(film.getDetails())
+                        .setPositiveButton("OK", null)
+                        .show();
+            }
+        });
 
 
 

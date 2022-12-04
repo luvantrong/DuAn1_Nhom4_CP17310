@@ -1,5 +1,6 @@
 package trong.fpt.duan1_nhom4_cp17310.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -60,6 +61,17 @@ public class AdapterFilmManager extends RecyclerView.Adapter<FilmManagerViewHold
             public void onClick(View view, int position, boolean isLongClick) {
                 OnItemClickFilmManager onItemClickFilmManager = (OnItemClickFilmManager) view.getContext();
                 onItemClickFilmManager.onItemClickUpdate(film);
+            }
+        });
+
+        holder.imv_film_manager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(v.getContext())
+                        .setTitle("Nội dung phim")
+                        .setMessage(film.getDetails())
+                        .setPositiveButton("OK", null)
+                        .show();
             }
         });
     }

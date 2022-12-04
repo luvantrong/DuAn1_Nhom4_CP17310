@@ -9,12 +9,14 @@ public class Film implements Serializable {
     private String ngayChieu;
     private String giaVe;
     private String linkAnh;
+    private String details;
 
-    public Film(String tenFilm, String ngayChieu, String giaVe, String linkAnh) {
+    public Film(String tenFilm, String ngayChieu, String giaVe, String linkAnh, String details) {
         this.tenFilm = tenFilm;
         this.ngayChieu = ngayChieu;
         this.giaVe = giaVe;
         this.linkAnh = linkAnh;
+        this.details = details;
     }
 
     public String getIdFilm() {
@@ -55,5 +57,13 @@ public class Film implements Serializable {
 
     public void setLinkAnh(String linkAnh) {
         this.linkAnh = linkAnh;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 }

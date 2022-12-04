@@ -1,5 +1,6 @@
 package trong.fpt.duan1_nhom4_cp17310.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -51,6 +52,17 @@ public class AdapterFilmTrangChu extends RecyclerView.Adapter<FilmTrangChuViewHo
                 intent.putExtra("thongTinPhim", film);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 view.getContext().startActivity(intent);
+            }
+        });
+
+        holder.imv_film_manager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(v.getContext())
+                        .setTitle("Nội dung phim")
+                        .setMessage(film.getDetails())
+                        .setPositiveButton("OK", null)
+                        .show();
             }
         });
     }

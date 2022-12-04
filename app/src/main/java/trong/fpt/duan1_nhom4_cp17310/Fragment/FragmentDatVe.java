@@ -52,7 +52,8 @@ public class FragmentDatVe extends Fragment {
                                 String linkAnh = map.get("linkAnh").toString();
                                 String giaVe = map.get("giaVe").toString();
                                 String ngayKhoiChieu = map.get("ngayKhoiChieu").toString();
-                                Film film = new Film(tenPhim, ngayKhoiChieu, giaVe, linkAnh);
+                                String details = map.get("details").toString();
+                                Film film = new Film(tenPhim, ngayKhoiChieu, giaVe, linkAnh, details);
                                 film.setIdFilm(document.getId());
                                 list.add(film);
                             }

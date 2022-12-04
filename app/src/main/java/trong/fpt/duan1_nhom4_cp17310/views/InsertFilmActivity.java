@@ -47,7 +47,7 @@ import trong.fpt.duan1_nhom4_cp17310.R;
 public class InsertFilmActivity extends AppCompatActivity {
 
     private ImageView imv_choose_image_film, iv_anh_quanli_phim;
-    private TextInputEditText ip_themTenPhim, ip_themNgay, ip_themGiaVe;
+    private TextInputEditText ip_themTenPhim, ip_themNgay, ip_themGiaVe, ip_noiDungPhim;
     private Button btn_insert_film, btn_cancel_insert_film;
     final int REQUESTCODE_READ_EXTERNAL_STORAGE = 120;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -65,6 +65,7 @@ public class InsertFilmActivity extends AppCompatActivity {
         ip_themGiaVe = findViewById(R.id.ip_themGiaVe);
         btn_insert_film = findViewById(R.id.btn_insert_film);
         btn_cancel_insert_film = findViewById(R.id.btn_cancel_insert_film);
+        ip_noiDungPhim = findViewById(R.id.ip_noiDungPhim);
 
         imv_choose_image_film.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +79,7 @@ public class InsertFilmActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(InsertFilmActivity.this, QuanLyFilmsActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -88,12 +90,14 @@ public class InsertFilmActivity extends AppCompatActivity {
                 String ngayKhoiChieu = ip_themNgay.getText().toString();
                 String giaVe = ip_themGiaVe.getText().toString();
                 String link = linkDL;
+                String details = ip_noiDungPhim.getText().toString();
 
                 Map<String, Object> film = new HashMap<>();
                 film.put("linkAnh", link);
                 film.put("giaVe", giaVe);
                 film.put("ngayKhoiChieu", ngayKhoiChieu);
                 film.put("tenPhim", tenPhim);
+                film.put("details", details);
 
                 // Add a new document with a generated ID
                 db.collection("films")
@@ -109,6 +113,7 @@ public class InsertFilmActivity extends AppCompatActivity {
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 Intent intent = new Intent(InsertFilmActivity.this, QuanLyFilmsActivity.class);
                                                 startActivity(intent);
+                                                finish();
                                             }
                                         })
                                         .show();
