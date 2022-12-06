@@ -16,11 +16,15 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +41,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -408,18 +413,49 @@ public class TicketsActivity extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    new AlertDialog.Builder(TicketsActivity.this)
-                                            .setTitle("Notification")
-                                            .setMessage("Successful ticket booking")
-                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    Intent intent = new Intent(TicketsActivity.this, BookedTicketActivity.class);
-                                                    startActivity(intent);
-                                                    finish();
-                                                }
-                                            })
-                                            .show();
+//                                    new AlertDialog.Builder(TicketsActivity.this)
+//                                            .setTitle("Notification")
+//                                            .setMessage("Successful ticket booking")
+//                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(DialogInterface dialogInterface, int i) {
+//                                                    Intent intent = new Intent(TicketsActivity.this, BookedTicketActivity.class);
+//                                                    startActivity(intent);
+//                                                    finish();
+//                                                }
+//                                            })
+//                                            .show();
+
+                                    androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(view.getContext());
+                                    LayoutInflater inflater = getLayoutInflater();
+                                    View viewdialog = inflater.inflate(R.layout.item_bookedticket2, null);
+                                    TextView tv_tenphim = viewdialog.findViewById(R.id.tv_tenphim);
+                                    TextView tv_tentaikhoan = viewdialog.findViewById(R.id.tv_tentaikhoan);
+                                    TextView tv_suatxem = viewdialog.findViewById(R.id.tv_suatxem);
+                                    TextView tv_ngayxemphim = viewdialog.findViewById(R.id.tv_ngayxemphim);
+                                    TextView tv_maghe = viewdialog.findViewById(R.id.tv_maghe);
+                                    TextView tv_giave = viewdialog.findViewById(R.id.tv_giave);
+
+                                    tv_tenphim.setText(t_tenPhim);
+                                    tv_tentaikhoan.setText(t_tenTaiKhoan);
+                                    tv_suatxem.setText(t_suatXem);
+                                    tv_ngayxemphim.setText(t_ngayXemPhim);
+                                    tv_maghe.setText(t_maGhe);
+                                    tv_giave.setText(t_giaVe);
+
+                                    builder.setView(viewdialog);
+                                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Toast.makeText(TicketsActivity.this, "Đặt vé thành công", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(view.getContext(), MainActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+                                    androidx.appcompat.app.AlertDialog dialog = builder.create();
+                                    dialog.show();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
