@@ -1,5 +1,6 @@
 package trong.fpt.duan1_nhom4_cp17310.Fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+
 import trong.fpt.duan1_nhom4_cp17310.R;
 import trong.fpt.duan1_nhom4_cp17310.views.BookedTicketActivity;
 import trong.fpt.duan1_nhom4_cp17310.views.ChangePassActivity;
@@ -25,8 +35,15 @@ import trong.fpt.duan1_nhom4_cp17310.views.QuanLyFilmsActivity;
 import trong.fpt.duan1_nhom4_cp17310.views.ThongKeActivity;
 
 public class FragmentKhac extends Fragment {
-    LinearLayout ln_quanlyphim, ln_quanlybanner,ln_thongtinuser, ln_logout,ln_bookedTickets,ln_changepass, ln_thongke;
+    LinearLayout ln_quanlyphim, ln_quanlybanner, ln_thongtinuser, ln_logout, ln_bookedTickets, ln_changepass, ln_thongke;
     TextView tv_quanly_khac;
+    //Google
+    GoogleSignInClient gsc;
+    GoogleSignInAccount account;
+
+    //Facebook
+    FirebaseAuth mFirebaseAuth;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,9 +58,20 @@ public class FragmentKhac extends Fragment {
         ln_thongke = view.findViewById(R.id.ln_thongke);
         tv_quanly_khac = view.findViewById(R.id.tv_quanly_khac);
 
+        account = GoogleSignIn.getLastSignedInAccount(view.getContext());
+
+        GoogleSignInOptions gso = new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestProfile()
+                .requestEmail()
+                .build();
+        gsc = GoogleSignIn.getClient(view.getContext(), gso);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
         SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("LOGIN_STATUS", Context.MODE_PRIVATE);
         int loaiTaiKhoan = sharedPreferences.getInt("loaiTaiKhoan", 10);
-        if(loaiTaiKhoan != 1){
+        if (loaiTaiKhoan != 1) {
             ln_quanlyphim.setVisibility(View.GONE);
             ln_quanlybanner.setVisibility(View.GONE);
             ln_thongke.setVisibility(View.GONE);
@@ -74,13 +102,13 @@ public class FragmentKhac extends Fragment {
             }
         });
 
-       ln_thongtinuser.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent i = new Intent(v.getContext(),ProfileActivity.class);
-               startActivity(i);
-           }
-       });
+        ln_thongtinuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), ProfileActivity.class);
+                startActivity(i);
+            }
+        });
 
         ln_quanlybanner.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,13 +121,37 @@ public class FragmentKhac extends Fragment {
         ln_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LOGIN_STATUS", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear();
-                editor.apply();
-                Intent intent = new Intent(view.getContext(), LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+
+                if (account != null) {
+                    gsc.signOut().addOnCompleteListener((Activity) view.getContext(), new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Intent homeIntent = new Intent(view.getContext(), LoginActivity.class);
+                            homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(homeIntent);
+                        }
+                    });
+                } else if (mFirebaseAuth != null) {
+                    mFirebaseAuth.signOut();
+                    LoginManager.getInstance().logOut();
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LOGIN_STATUS", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear();
+                    editor.apply();
+                    Intent intent = new Intent(view.getContext(), LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+
+                } else {
+
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LOGIN_STATUS", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear();
+                    editor.apply();
+                    Intent intent = new Intent(view.getContext(), LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -110,7 +162,6 @@ public class FragmentKhac extends Fragment {
                 startActivity(i);
             }
         });
-
 
 
         return view;
