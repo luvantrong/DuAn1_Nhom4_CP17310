@@ -40,7 +40,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,7 +53,7 @@ import trong.fpt.duan1_nhom4_cp17310.models.Film;
 public class UpdateFilmActivity extends AppCompatActivity {
 
     private ImageView iv_image_update_film, imv_choose_update;
-    private TextInputEditText ip_suaTenPhim, ip_suaNgay, ip_suaGiaVe;
+    private TextInputEditText ip_suaTenPhim, ip_suaNgay, ip_suaGiaVe, ip_noiDungPhim;
     private Button btn_update_film, btn_cancel_update_film;
     final int REQUESTCODE_READ_EXTERNAL_STORAGE = 120;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -69,6 +71,7 @@ public class UpdateFilmActivity extends AppCompatActivity {
         ip_suaGiaVe = findViewById(R.id.ip_suaGiaVe);
         btn_update_film = findViewById(R.id.btn_update_film);
         btn_cancel_update_film = findViewById(R.id.btn_cancel_update_film);
+        ip_noiDungPhim = findViewById(R.id.ip_noiDungPhim);
 
         Intent intent = getIntent();
         Film film = (Film) intent.getSerializableExtra("film");
@@ -77,6 +80,8 @@ public class UpdateFilmActivity extends AppCompatActivity {
         ip_suaNgay.setText(film.getNgayChieu());
         ip_suaGiaVe.setText(film.getGiaVe());
         linkDL = film.getLinkAnh();
+        ip_noiDungPhim.setText(film.getDetails());
+
         new DownloadImageFromInternet(iv_image_update_film).execute(linkDL);
 
         imv_choose_update.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +106,61 @@ public class UpdateFilmActivity extends AppCompatActivity {
                 String tenPhim = ip_suaTenPhim.getText().toString();
                 String ngayKhoiChieu = ip_suaNgay.getText().toString();
                 String giaVe = ip_suaGiaVe.getText().toString();
+                String details = ip_noiDungPhim.getText().toString();
+
+                if (tenPhim.isEmpty()) {
+                    new AlertDialog.Builder(UpdateFilmActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Nhập tên phim")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                } else if (ngayKhoiChieu.isEmpty()) {
+                    new AlertDialog.Builder(UpdateFilmActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Nhập ngày khởi chiếu")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                } else if (giaVe.isEmpty()) {
+                    new AlertDialog.Builder(UpdateFilmActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Nhập giá vé")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                } else if (checkGiaVe(giaVe)== false) {
+                    new AlertDialog.Builder(UpdateFilmActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Nhập sai giá vé")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+
+                }else if(checkDate(ngayKhoiChieu) == false){
+                    new AlertDialog.Builder(UpdateFilmActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Nhập sai định dạng ngày khởi chiếu")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                }else if(linkDL.length() ==0){
+                    new AlertDialog.Builder(UpdateFilmActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Chọn poster phim")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                }
+                else if(details.length() ==0){
+                    new AlertDialog.Builder(UpdateFilmActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Nhập nội dung phim")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                }
+                else {
 
                 // Create a new user with a first and last name
                 Map<String, Object> user = new HashMap<>();
@@ -108,6 +168,7 @@ public class UpdateFilmActivity extends AppCompatActivity {
                 user.put("ngayKhoiChieu", ngayKhoiChieu);
                 user.put("giaVe", giaVe);
                 user.put("linkAnh", linkDL);
+                user.put("details", details);
 
                 db.collection("films")
                         .document(film.getIdFilm())
@@ -139,7 +200,7 @@ public class UpdateFilmActivity extends AppCompatActivity {
                                         .show();
                             }
                         });
-            }
+            }}
         });
     }
 
@@ -243,6 +304,36 @@ public class UpdateFilmActivity extends AppCompatActivity {
             }
         });
     }
+    private Boolean checkDate(String ngayKhoiChieu){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date ngay_khoan = null;
+        try {
+            ngay_khoan = simpleDateFormat.parse(ngayKhoiChieu);
+            return  true;
+        } catch (Exception e) {
+            ngay_khoan = null;
+            return  false;
+        }
+    }
 
+
+    private Boolean checkGiaVe(String giaVe){
+        int giave = 0;
+        try {
+            giave = Integer.parseInt(giaVe);
+            if(giave < 0){
+                new AlertDialog.Builder(UpdateFilmActivity.this)
+                        .setTitle("Thông báo")
+                        .setMessage("Nhập giá vé sai")
+                        .setIcon(R.drawable.attention_warning_14525)
+                        .setPositiveButton("OK", null)
+                        .show();
+                return  false;
+            }
+            return  true;
+        } catch (Exception e) {
+            return  false;
+        }
+    }
 
 }

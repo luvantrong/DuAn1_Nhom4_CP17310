@@ -76,39 +76,58 @@ public class InsertBannerActivity extends AppCompatActivity {
                 String moTa = tv_description_banner.getText().toString();
                 String link = linkDL;
 
-                Map<String, Object> banner = new HashMap<>();
-                banner.put("linkAnh", link);
-                banner.put("tenphim", moTa);
+                if (moTa.isEmpty() || link.length() == 0) {
+                    new AlertDialog.Builder(InsertBannerActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Phải nhập đầy đủ thông tin")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                }else if(link.length()==0){
+                    new AlertDialog.Builder(InsertBannerActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Chọn banner")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                }
+                else {
 
-                // Add a new document with a generated ID
-                db.collection("banner")
-                        .add(banner)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                new AlertDialog.Builder(InsertBannerActivity.this)
-                                        .setTitle("Notification")
-                                        .setMessage("Banner added successfully")
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                Intent intent = new Intent(InsertBannerActivity.this, QuanLyBannerActivity.class);
-                                                startActivity(intent);
-                                            }
-                                        })
-                                        .show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                new AlertDialog.Builder(InsertBannerActivity.this)
-                                        .setTitle("Notification")
-                                        .setMessage("Add banner failed")
-                                        .setPositiveButton("OK", null)
-                                        .show();
-                            }
-                        });
+
+                    Map<String, Object> banner = new HashMap<>();
+                    banner.put("linkAnh", link);
+                    banner.put("tenphim", moTa);
+
+                    // Add a new document with a generated ID
+                    db.collection("banner")
+                            .add(banner)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    new AlertDialog.Builder(InsertBannerActivity.this)
+                                            .setTitle("Notification")
+                                            .setMessage("Banner added successfully")
+                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    Intent intent = new Intent(InsertBannerActivity.this, QuanLyBannerActivity.class);
+                                                    startActivity(intent);
+                                                }
+                                            })
+                                            .show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    new AlertDialog.Builder(InsertBannerActivity.this)
+                                            .setTitle("Notification")
+                                            .setMessage("Add banner failed")
+                                            .setPositiveButton("OK", null)
+                                            .show();
+                                }
+                            });
+                }
             }
         });
 
@@ -164,10 +183,10 @@ public class InsertBannerActivity extends AppCompatActivity {
             }
     );
 
-    private void uploadToFirebase(Bitmap bitmap){
+    private void uploadToFirebase(Bitmap bitmap) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
-        StorageReference imgaeReference = storageReference.child(Calendar.getInstance().getTimeInMillis()+ ".jpg");
+        StorageReference imgaeReference = storageReference.child(Calendar.getInstance().getTimeInMillis() + ".jpg");
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         byte[] bytes = outputStream.toByteArray();
@@ -175,7 +194,7 @@ public class InsertBannerActivity extends AppCompatActivity {
         uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
             public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
                     return imgaeReference.getDownloadUrl();
                 }
                 return null;
@@ -183,9 +202,9 @@ public class InsertBannerActivity extends AppCompatActivity {
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Uri dowloadUri = task.getResult();
-                    linkDL = dowloadUri +"";
+                    linkDL = dowloadUri + "";
                 }
             }
         });

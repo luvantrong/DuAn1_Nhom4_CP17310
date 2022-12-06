@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_all"
-    tools:context=".views.UpdateFilmActivity">
+    tools:context=".views.UpdateFilmActivity"
+    android:paddingBottom="15dp">
 
     <TextView
         android:id="@+id/tv_them"
@@ -119,6 +128,26 @@
                 tools:ignore="TouchTargetSizeCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LoginTextInputLayoutStyle"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            android:textColorHint="#fff"
+            app:startIconTint="#fff"
+            app:startIconDrawable="@drawable/price">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ip_noiDungPhim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nội dung phim"
+                android:inputType="text"
+                android:textColor="#fff"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -142,3 +171,4 @@
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
+</ScrollView>

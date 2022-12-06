@@ -38,10 +38,15 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import trong.fpt.duan1_nhom4_cp17310.Interfaces.DateValidator;
 import trong.fpt.duan1_nhom4_cp17310.R;
 
 public class InsertFilmActivity extends AppCompatActivity {
@@ -86,49 +91,107 @@ public class InsertFilmActivity extends AppCompatActivity {
         btn_insert_film.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 String tenPhim = ip_themTenPhim.getText().toString();
                 String ngayKhoiChieu = ip_themNgay.getText().toString();
                 String giaVe = ip_themGiaVe.getText().toString();
                 String link = linkDL;
                 String details = ip_noiDungPhim.getText().toString();
 
-                Map<String, Object> film = new HashMap<>();
-                film.put("linkAnh", link);
-                film.put("giaVe", giaVe);
-                film.put("ngayKhoiChieu", ngayKhoiChieu);
-                film.put("tenPhim", tenPhim);
-                film.put("details", details);
 
-                // Add a new document with a generated ID
-                db.collection("films")
-                        .add(film)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                new AlertDialog.Builder(InsertFilmActivity.this)
-                                        .setTitle("Notification")
-                                        .setMessage("Film added successfully")
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                Intent intent = new Intent(InsertFilmActivity.this, QuanLyFilmsActivity.class);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                        })
-                                        .show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                new AlertDialog.Builder(InsertFilmActivity.this)
-                                        .setTitle("Notification")
-                                        .setMessage("Add film failed")
-                                        .setPositiveButton("OK", null)
-                                        .show();
-                            }
-                        });
+                if (tenPhim.isEmpty()) {
+                    new AlertDialog.Builder(InsertFilmActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Nhập tên phim")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                } else if (ngayKhoiChieu.isEmpty()) {
+                    new AlertDialog.Builder(InsertFilmActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Nhập ngày khởi chiếu")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                } else if (giaVe.isEmpty()) {
+                    new AlertDialog.Builder(InsertFilmActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Nhập giá vé")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                } else if (checkGiaVe(giaVe)== false) {
+                    new AlertDialog.Builder(InsertFilmActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Nhập sai giá vé")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+
+                }else if(checkDate(ngayKhoiChieu) == false){
+                    new AlertDialog.Builder(InsertFilmActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Nhập sai định dạng ngày khởi chiếu")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                }else if(link.length() ==0){
+                    new AlertDialog.Builder(InsertFilmActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Chọn poster phim")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                }
+                else if(details.length() ==0){
+                    new AlertDialog.Builder(InsertFilmActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Nhập nội dung phim")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                }
+                else {
+
+                    Map<String, Object> film = new HashMap<>();
+                    film.put("linkAnh", link);
+                    film.put("giaVe", giaVe);
+                    film.put("ngayKhoiChieu", ngayKhoiChieu);
+                    film.put("tenPhim", tenPhim);
+                    film.put("details", details);
+
+                    // Add a new document with a generated ID
+                    db.collection("films")
+                            .add(film)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    new AlertDialog.Builder(InsertFilmActivity.this)
+                                            .setTitle("Notification")
+                                            .setMessage("Film added successfully")
+                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    Intent intent = new Intent(InsertFilmActivity.this, QuanLyFilmsActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            })
+                                            .show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    new AlertDialog.Builder(InsertFilmActivity.this)
+                                            .setTitle("Notification")
+                                            .setMessage("Add film failed")
+                                            .setPositiveButton("OK", null)
+                                            .show();
+                                }
+                            });
+                }
             }
         });
 
@@ -183,10 +246,10 @@ public class InsertFilmActivity extends AppCompatActivity {
             }
     );
 
-    private void uploadToFirebase(Bitmap bitmap){
+    private void uploadToFirebase(Bitmap bitmap) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
-        StorageReference imgaeReference = storageReference.child(Calendar.getInstance().getTimeInMillis()+ ".jpg");
+        StorageReference imgaeReference = storageReference.child(Calendar.getInstance().getTimeInMillis() + ".jpg");
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         byte[] bytes = outputStream.toByteArray();
@@ -194,7 +257,7 @@ public class InsertFilmActivity extends AppCompatActivity {
         uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
             public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
                     return imgaeReference.getDownloadUrl();
                 }
                 return null;
@@ -202,11 +265,44 @@ public class InsertFilmActivity extends AppCompatActivity {
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Uri dowloadUri = task.getResult();
-                    linkDL = dowloadUri +"";
+                    linkDL = dowloadUri + "";
                 }
             }
         });
     }
+
+   private Boolean checkDate(String ngayKhoiChieu){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+       Date ngay_khoan = null;
+       try {
+           ngay_khoan = simpleDateFormat.parse(ngayKhoiChieu);
+           return  true;
+       } catch (Exception e) {
+           ngay_khoan = null;
+           return  false;
+       }
+   }
+
+
+    private Boolean checkGiaVe(String giaVe){
+        int giave = 0;
+        try {
+            giave = Integer.parseInt(giaVe);
+            if(giave < 0){
+                new AlertDialog.Builder(InsertFilmActivity.this)
+                        .setTitle("Thông báo")
+                        .setMessage("Nhập giá vé sai")
+                        .setIcon(R.drawable.attention_warning_14525)
+                        .setPositiveButton("OK", null)
+                        .show();
+                return  false;
+            }
+            return  true;
+        } catch (Exception e) {
+            return  false;
+        }
+    }
+
 }

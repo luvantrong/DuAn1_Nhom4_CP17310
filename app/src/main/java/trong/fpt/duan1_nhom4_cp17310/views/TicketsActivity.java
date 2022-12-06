@@ -64,7 +64,7 @@ public class TicketsActivity extends AppCompatActivity {
     private AdapterSoGhe adapterSoGhe;
 
     private String soGheHienThi = "";
-    private int soGheChon;
+    private int soGheChon = -1;
     private String suatXemChon = "";
 
     private ArrayList<Tickets> dsTicketsSuat8h;
@@ -254,62 +254,62 @@ public class TicketsActivity extends AppCompatActivity {
             @Override
             public void onClick(int s) {
 
-                for(int i=1; i<=50;i++){
-                    if(s==i){
+                for (int i = 1; i <= 50; i++) {
+                    if (s == i) {
                         soGheChon = i;
                     }
                 }
 
-                for(int i1 = 1; i1<=8;i1++){
-                    if(s==i1){
+                for (int i1 = 1; i1 <= 8; i1++) {
+                    if (s == i1) {
                         soGheHienThi = "A" + s;
                     }
                 }
 
-                for(int i2 = 9; i2<=16;i2++){
-                    int j=8;
-                    if(s==i2){
-                        soGheHienThi = "B" + (i2-j);
+                for (int i2 = 9; i2 <= 16; i2++) {
+                    int j = 8;
+                    if (s == i2) {
+                        soGheHienThi = "B" + (i2 - j);
                         j++;
                     }
                 }
 
-                for(int i3 = 17; i3<=24;i3++){
-                    int j=16;
-                    if(s==i3){
-                        soGheHienThi ="C" + (i3-j);
+                for (int i3 = 17; i3 <= 24; i3++) {
+                    int j = 16;
+                    if (s == i3) {
+                        soGheHienThi = "C" + (i3 - j);
                         j++;
                     }
                 }
 
-                for(int i4 = 25; i4<=32;i4++){
-                    int j=24;
-                    if(s==i4){
-                        soGheHienThi = "D" + (i4-j);
+                for (int i4 = 25; i4 <= 32; i4++) {
+                    int j = 24;
+                    if (s == i4) {
+                        soGheHienThi = "D" + (i4 - j);
                         j++;
                     }
                 }
 
-                for(int i5 = 33; i5<=40;i5++){
-                    int j=32;
-                    if(s==i5){
-                        soGheHienThi = "E" + (i5-j);
+                for (int i5 = 33; i5 <= 40; i5++) {
+                    int j = 32;
+                    if (s == i5) {
+                        soGheHienThi = "E" + (i5 - j);
                         j++;
                     }
                 }
 
-                for(int i6 = 41; i6<=48;i6++){
-                    int j=40;
-                    if(s==i6){
-                        soGheHienThi = "F" + (i6-j);
+                for (int i6 = 41; i6 <= 48; i6++) {
+                    int j = 40;
+                    if (s == i6) {
+                        soGheHienThi = "F" + (i6 - j);
                         j++;
                     }
                 }
 
-                for(int i7 = 49; i7<=50;i7++){
-                    int j=48;
-                    if(s==i7){
-                        soGheHienThi = "G" + (i7-j);
+                for (int i7 = 49; i7 <= 50; i7++) {
+                    int j = 48;
+                    if (s == i7) {
+                        soGheHienThi = "G" + (i7 - j);
                         j++;
                     }
                 }
@@ -341,9 +341,6 @@ public class TicketsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-
-
                 int t_soghe = soGheChon;
                 int t_trangThai = 1;
                 SoGhe soGhe = new SoGhe(t_soghe, t_trangThai);
@@ -355,6 +352,30 @@ public class TicketsActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_STATUS", Context.MODE_PRIVATE);
                 String t_tenTaiKhoan = sharedPreferences.getString("email", "");
                 String t_maGhe = soGheHienThi;
+
+               if (t_ngayXemPhim.length() == 0) {
+                    new AlertDialog.Builder(TicketsActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Chọn ngày xem phim")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                } else if (t_suatXem.length() == 0) {
+                    new AlertDialog.Builder(TicketsActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Chọn suất xem phim")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                }
+                else if (soGheChon < 0) {
+                    new AlertDialog.Builder(TicketsActivity.this)
+                            .setTitle("Thông báo")
+                            .setMessage("Chọn số ghế")
+                            .setIcon(R.drawable.attention_warning_14525)
+                            .setPositiveButton("OK", null)
+                            .show();
+                } else {
 //
 //                Intent intent1 = new Intent(TicketsActivity.this, PayPalActivity.class);
 //                intent1.putExtra("t_soghe", t_soghe);
@@ -371,46 +392,47 @@ public class TicketsActivity extends AppCompatActivity {
 //                finish();
 
 
-                Map<String, Object> tickets = new HashMap<>();
-                tickets.put("giaVe", t_giaVe);
-                tickets.put("ngayXemPhim", t_ngayXemPhim);
-                tickets.put("soLuong", t_soLuong);
-                tickets.put("suatXem", t_suatXem);
-                tickets.put("tenPhim", t_tenPhim);
-                tickets.put("tenTaiKhoan", t_tenTaiKhoan);
-                tickets.put("SoGhe", soGhe);
-                tickets.put("maGhe", t_maGhe);
+                    Map<String, Object> tickets = new HashMap<>();
+                    tickets.put("giaVe", t_giaVe);
+                    tickets.put("ngayXemPhim", t_ngayXemPhim);
+                    tickets.put("soLuong", t_soLuong);
+                    tickets.put("suatXem", t_suatXem);
+                    tickets.put("tenPhim", t_tenPhim);
+                    tickets.put("tenTaiKhoan", t_tenTaiKhoan);
+                    tickets.put("SoGhe", soGhe);
+                    tickets.put("maGhe", t_maGhe);
 
-                // Add a new document with a generated ID
-                db.collection("tickets")
-                        .add(tickets)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                new AlertDialog.Builder(TicketsActivity.this)
-                                        .setTitle("Notification")
-                                        .setMessage("Successful ticket booking")
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                Intent intent = new Intent(TicketsActivity.this, BookedTicketActivity.class);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                        })
-                                        .show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                new AlertDialog.Builder(TicketsActivity.this)
-                                        .setTitle("Notification")
-                                        .setMessage("Ticket booking failed")
-                                        .setPositiveButton("OK", null)
-                                        .show();
-                            }
-                        });
+                    // Add a new document with a generated ID
+                    db.collection("tickets")
+                            .add(tickets)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    new AlertDialog.Builder(TicketsActivity.this)
+                                            .setTitle("Notification")
+                                            .setMessage("Successful ticket booking")
+                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    Intent intent = new Intent(TicketsActivity.this, BookedTicketActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            })
+                                            .show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    new AlertDialog.Builder(TicketsActivity.this)
+                                            .setTitle("Notification")
+                                            .setMessage("Ticket booking failed")
+                                            .setPositiveButton("OK", null)
+                                            .show();
+                                }
+                            });
+                }
             }
         });
     }
@@ -456,9 +478,9 @@ public class TicketsActivity extends AppCompatActivity {
         return dsSuatXem;
     }
 
-    private ArrayList<SoGhe> dsSoGhe(){
+    private ArrayList<SoGhe> dsSoGhe() {
         ArrayList<SoGhe> dsSoGhe = new ArrayList<>();
-        for (int i = 1; i<=50; i++){
+        for (int i = 1; i <= 50; i++) {
             int trangThai = 0;
             SoGhe soGhe = new SoGhe(i, trangThai);
             dsSoGhe.add(soGhe);
@@ -536,10 +558,10 @@ public class TicketsActivity extends AppCompatActivity {
                                     soLuongSuat8h += soLuong;
 
                                     SoGhe soGhe = tickets.getSoGhe();
-                                    Log.d("AAA", soGhe.getSoGhe()+""+ soGhe.getTrangThai());
-                                    for(int j =0; j<dsSoGhe8h.size();j++){
-                                        int  soGhe1 = dsSoGhe8h.get(j).getSoGhe();
-                                        if(soGhe1==soGhe.getSoGhe()){
+                                    Log.d("AAA", soGhe.getSoGhe() + "" + soGhe.getTrangThai());
+                                    for (int j = 0; j < dsSoGhe8h.size(); j++) {
+                                        int soGhe1 = dsSoGhe8h.get(j).getSoGhe();
+                                        if (soGhe1 == soGhe.getSoGhe()) {
                                             dsSoGhe8h.set(j, soGhe);
                                         }
                                     }
@@ -600,10 +622,10 @@ public class TicketsActivity extends AppCompatActivity {
                                     soLuongSuat9h += soLuong;
 
                                     SoGhe soGhe = tickets.getSoGhe();
-                                    Log.d("AAA", soGhe.getSoGhe()+""+ soGhe.getTrangThai());
-                                    for(int j =0; j<dsSoGhe9h.size();j++){
-                                        int  soGhe1 = dsSoGhe9h.get(j).getSoGhe();
-                                        if(soGhe1==soGhe.getSoGhe()){
+                                    Log.d("AAA", soGhe.getSoGhe() + "" + soGhe.getTrangThai());
+                                    for (int j = 0; j < dsSoGhe9h.size(); j++) {
+                                        int soGhe1 = dsSoGhe9h.get(j).getSoGhe();
+                                        if (soGhe1 == soGhe.getSoGhe()) {
                                             dsSoGhe9h.set(j, soGhe);
                                         }
                                     }
@@ -664,8 +686,8 @@ public class TicketsActivity extends AppCompatActivity {
                                     soLuongSuat10h += soLuong;
 
                                     SoGhe soGhe = tickets.getSoGhe();
-                                    Log.d("AAA", soGhe.getSoGhe()+""+ soGhe.getTrangThai());
-                                    for(int j =0; j<dsSoGhe10h.size();j++) {
+                                    Log.d("AAA", soGhe.getSoGhe() + "" + soGhe.getTrangThai());
+                                    for (int j = 0; j < dsSoGhe10h.size(); j++) {
                                         int soGhe1 = dsSoGhe10h.get(j).getSoGhe();
                                         if (soGhe1 == soGhe.getSoGhe()) {
                                             dsSoGhe10h.set(j, soGhe);
@@ -726,8 +748,8 @@ public class TicketsActivity extends AppCompatActivity {
                                     soLuongSuat11h += soLuong;
 
                                     SoGhe soGhe = tickets.getSoGhe();
-                                    Log.d("AAA", soGhe.getSoGhe()+""+ soGhe.getTrangThai());
-                                    for(int j =0; j<dsSoGhe11h.size();j++) {
+                                    Log.d("AAA", soGhe.getSoGhe() + "" + soGhe.getTrangThai());
+                                    for (int j = 0; j < dsSoGhe11h.size(); j++) {
                                         int soGhe1 = dsSoGhe11h.get(j).getSoGhe();
                                         if (soGhe1 == soGhe.getSoGhe()) {
                                             dsSoGhe11h.set(j, soGhe);
@@ -789,8 +811,8 @@ public class TicketsActivity extends AppCompatActivity {
                                     soLuongSuat13h += soLuong;
 
                                     SoGhe soGhe = tickets.getSoGhe();
-                                    Log.d("AAA", soGhe.getSoGhe()+""+ soGhe.getTrangThai());
-                                    for(int j =0; j<dsSoGhe13h.size();j++) {
+                                    Log.d("AAA", soGhe.getSoGhe() + "" + soGhe.getTrangThai());
+                                    for (int j = 0; j < dsSoGhe13h.size(); j++) {
                                         int soGhe1 = dsSoGhe13h.get(j).getSoGhe();
                                         if (soGhe1 == soGhe.getSoGhe()) {
                                             dsSoGhe13h.set(j, soGhe);
@@ -854,8 +876,8 @@ public class TicketsActivity extends AppCompatActivity {
                                     soLuongSuat14h += soLuong;
 
                                     SoGhe soGhe = tickets.getSoGhe();
-                                    Log.d("AAA", soGhe.getSoGhe()+""+ soGhe.getTrangThai());
-                                    for(int j =0; j<dsSoGhe14h.size();j++) {
+                                    Log.d("AAA", soGhe.getSoGhe() + "" + soGhe.getTrangThai());
+                                    for (int j = 0; j < dsSoGhe14h.size(); j++) {
                                         int soGhe1 = dsSoGhe14h.get(j).getSoGhe();
                                         if (soGhe1 == soGhe.getSoGhe()) {
                                             dsSoGhe14h.set(j, soGhe);
@@ -916,8 +938,8 @@ public class TicketsActivity extends AppCompatActivity {
                                     soLuongSuat15h += soLuong;
 
                                     SoGhe soGhe = tickets.getSoGhe();
-                                    Log.d("AAA", soGhe.getSoGhe()+""+ soGhe.getTrangThai());
-                                    for(int j =0; j<dsSoGhe15h.size();j++) {
+                                    Log.d("AAA", soGhe.getSoGhe() + "" + soGhe.getTrangThai());
+                                    for (int j = 0; j < dsSoGhe15h.size(); j++) {
                                         int soGhe1 = dsSoGhe15h.get(j).getSoGhe();
                                         if (soGhe1 == soGhe.getSoGhe()) {
                                             dsSoGhe15h.set(j, soGhe);
@@ -978,8 +1000,8 @@ public class TicketsActivity extends AppCompatActivity {
                                     soLuongSuat16h += soLuong;
 
                                     SoGhe soGhe = tickets.getSoGhe();
-                                    Log.d("AAA", soGhe.getSoGhe()+""+ soGhe.getTrangThai());
-                                    for(int j =0; j<dsSoGhe16h.size();j++) {
+                                    Log.d("AAA", soGhe.getSoGhe() + "" + soGhe.getTrangThai());
+                                    for (int j = 0; j < dsSoGhe16h.size(); j++) {
                                         int soGhe1 = dsSoGhe16h.get(j).getSoGhe();
                                         if (soGhe1 == soGhe.getSoGhe()) {
                                             dsSoGhe16h.set(j, soGhe);
@@ -1040,8 +1062,8 @@ public class TicketsActivity extends AppCompatActivity {
                                     soLuongSuat17h += soLuong;
 
                                     SoGhe soGhe = tickets.getSoGhe();
-                                    Log.d("AAA", soGhe.getSoGhe()+""+ soGhe.getTrangThai());
-                                    for(int j =0; j<dsSoGhe17h.size();j++) {
+                                    Log.d("AAA", soGhe.getSoGhe() + "" + soGhe.getTrangThai());
+                                    for (int j = 0; j < dsSoGhe17h.size(); j++) {
                                         int soGhe1 = dsSoGhe17h.get(j).getSoGhe();
                                         if (soGhe1 == soGhe.getSoGhe()) {
                                             dsSoGhe17h.set(j, soGhe);
@@ -1102,8 +1124,8 @@ public class TicketsActivity extends AppCompatActivity {
                                     soLuongSuat18h += soLuong;
 
                                     SoGhe soGhe = tickets.getSoGhe();
-                                    Log.d("AAA", soGhe.getSoGhe()+""+ soGhe.getTrangThai());
-                                    for(int j =0; j<dsSoGhe18h.size();j++) {
+                                    Log.d("AAA", soGhe.getSoGhe() + "" + soGhe.getTrangThai());
+                                    for (int j = 0; j < dsSoGhe18h.size(); j++) {
                                         int soGhe1 = dsSoGhe18h.get(j).getSoGhe();
                                         if (soGhe1 == soGhe.getSoGhe()) {
                                             dsSoGhe18h.set(j, soGhe);
@@ -1164,8 +1186,8 @@ public class TicketsActivity extends AppCompatActivity {
                                     soLuongSuat19h += soLuong;
 
                                     SoGhe soGhe = tickets.getSoGhe();
-                                    Log.d("AAA", soGhe.getSoGhe()+""+ soGhe.getTrangThai());
-                                    for(int j =0; j<dsSoGhe19h.size();j++) {
+                                    Log.d("AAA", soGhe.getSoGhe() + "" + soGhe.getTrangThai());
+                                    for (int j = 0; j < dsSoGhe19h.size(); j++) {
                                         int soGhe1 = dsSoGhe19h.get(j).getSoGhe();
                                         if (soGhe1 == soGhe.getSoGhe()) {
                                             dsSoGhe19h.set(j, soGhe);
@@ -1226,8 +1248,8 @@ public class TicketsActivity extends AppCompatActivity {
                                     soLuongSuat20h += soLuong;
 
                                     SoGhe soGhe = tickets.getSoGhe();
-                                    Log.d("AAA", soGhe.getSoGhe()+""+ soGhe.getTrangThai());
-                                    for(int j =0; j<dsSoGhe20h.size();j++) {
+                                    Log.d("AAA", soGhe.getSoGhe() + "" + soGhe.getTrangThai());
+                                    for (int j = 0; j < dsSoGhe20h.size(); j++) {
                                         int soGhe1 = dsSoGhe20h.get(j).getSoGhe();
                                         if (soGhe1 == soGhe.getSoGhe()) {
                                             dsSoGhe20h.set(j, soGhe);
